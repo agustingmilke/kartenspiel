@@ -284,6 +284,7 @@ function MostrarSalas(){
 	document.getElementById("Usuarios").style.display="none";
 }
 function MostrarSeleccion(){
+	socket.emit('new-ganadas',player);
 	document.getElementById("P0").innerHTML="";
 	document.getElementById("P1").innerHTML="";
 	document.getElementById("P2").innerHTML="";

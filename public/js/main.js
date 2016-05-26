@@ -6,35 +6,42 @@ for(x=0;x<5;x++)
   Turnos[x]=false;
 socket.on('inicio',function(data){
   player = data.name;
-  ganadas = data.ganadas;
+  //ganadas = data.ganadas;
  // friends = data.friends;
   //alert(player);
   //alert(ganadas);
   //alert(friends);
-  if(ganadas > 4){
+  
+})
+socket.on('ganadas',function(data){
+  //alert(data);
+  if(data.player==player){
+    if(data.res > 4){
     document.getElementById("S2").innerHTML = "<img onclick='Selection(2)' src='images/Carta_2_1.jpg' width='120px' height='180px'>";
+    }
+    else{
+      document.getElementById("S2").innerHTML = "<img src='images/Carta_2_X.jpg' width='120px' height='180px'>";
+    }
+    if(data.res > 9){
+      document.getElementById("S5").innerHTML = "<div id='s5' onclick='Selection(5)' style='background-image: url(images/Fondo_2.jpg); height: 180px; width: 280px'></div>";
+    }
+    else{
+      document.getElementById("S5").innerHTML = "<div id='s5' style='background-image: url(images/Fondo_2.jpg); height: 180px; width: 280px'><div align='center'><br><img src='images/candado.png' width='200' height='130'></div></div>";
+    }
+    if(data.res > 14){
+      document.getElementById("S3").innerHTML = "<img onclick='Selection(3)' src='images/Carta_3_1.jpg' width='120px' height='180px'>";
+    }
+    else{
+      document.getElementById("S3").innerHTML = "<img src='images/Carta_3_X.jpg' width='120px' height='180px'>";
+    }
+    if(data.res > 19){
+      document.getElementById("S6").innerHTML = "<div id='s6' onclick='Selection(6)' style='background-image: url(images/Fondo_3.jpg); height: 180px; width: 280px'></div>";
+    }
+    else{
+      document.getElementById("S6").innerHTML = "<div id='s6' style='background-image: url(images/Fondo_3.jpg); height: 180px; width: 280px'><div align='center'><br><img src='images/candado.png' width='200' height='130'></div></div>";
+    }
   }
-  else{
-    document.getElementById("S2").innerHTML = "<img src='images/Carta_2_X.jpg' width='120px' height='180px'>";
-  }
-  if(ganadas > 9){
-    document.getElementById("S5").innerHTML = "<div id='s5' onclick='Selection(5)' style='background-image: url(images/Fondo_2.jpg); height: 180px; width: 280px'></div>";
-  }
-  else{
-    document.getElementById("S5").innerHTML = "<div id='s5' style='background-image: url(images/Fondo_2.jpg); height: 180px; width: 280px'><div align='center'><br><img src='images/candado.png' width='200' height='130'></div></div>";
-  }
-  if(ganadas > 14){
-    document.getElementById("S3").innerHTML = "<img onclick='Selection(3)' src='images/Carta_3_1.jpg' width='120px' height='180px'>";
-  }
-  else{
-    document.getElementById("S3").innerHTML = "<img src='images/Carta_3_X.jpg' width='120px' height='180px'>";
-  }
-  if(ganadas > 19){
-    document.getElementById("S6").innerHTML = "<div id='s6' onclick='Selection(6)' style='background-image: url(images/Fondo_3.jpg); height: 180px; width: 280px'></div>";
-  }
-  else{
-    document.getElementById("S6").innerHTML = "<div id='s6' style='background-image: url(images/Fondo_3.jpg); height: 180px; width: 280px'><div align='center'><br><img src='images/candado.png' width='200' height='130'></div></div>";
-  }
+    
 })
 socket.on('Username',function(data){
   if(data.Sala==Sala){

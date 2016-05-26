@@ -7,14 +7,35 @@ var mysql   = require('mysql');
 var name;
 var ganadas=0;
 var friends;
-
+var connection = mysql.createConnection({
+     host: 'localhost',
+     user: 'root',
+     password: '',
+     database: 'kartenspiel',
+     //port: 3306
+  });
+connection.connect();
+connection.query('SELECT * from usuarios', function(err,rows,fields){
+  if(!err)
+    console.log(rows);
+  else
+    console.log('error en la base de datos');
+});
 app.use(express.static(path.join(__dirname, 'public')));
     app.get('/',function(req,res){
-    	console.log(req.query);
-
-    	//name=req.query.name;
-    	//friends=req.query.friends;
-    	//ganadas=req.query.ganadas;	
+      console.log(req.query);
+      name=req.query.name;
+      console.log(name);
+      /*var datos = connection.query("SELECT Amigo from amigos where Usuario='"+name+"'");
+      console.log(datos);*/
+      //friends=req.query.friends;
+      //ganadas=req.query.ganadas;  
+      connection.query("SELECT Amigo from amigos where Usuario='"+name+"'", function(err,rows,fields){
+        if(!err)
+          console.log(rows);
+        else
+          console.log('error en la consulta');
+      });
        res.sendfile(__dirname+'/juego.html') ; 
        
     });
@@ -33,24 +54,6 @@ io.on('connection', function(socket) {
 	};
 	socket.emit('inicio',datos);
   	socket.emit('rooms',rooms);
-	/*var connection = mysql.createConnection({
-	   host: 'localhost',
-	   user: 'root',
-	   password: '',
-	   database: 'kartenspiel',
-	   port: 3306
-	});*/
-  //console.log('Alguien se ha conectado con Sockets');
-  
-  /*socket.emit('preguntar');
-  socket.on('db_results', function(data){
-  	clave=data;
-  	socket.emit('clave',clave);
-  });
-
-  socket.interval =   setInterval(function(){
-                            sendDbdatatoClient( socket );
-                        } , 3000);*/
 
   socket.on('disconnect',function(){
 	 console.log("alguien se desconectooooo :C");
@@ -58,6 +61,19 @@ io.on('connection', function(socket) {
             clearInterval( socket.interval );
         }*/
   });	
+  socket.on('new-ganadas', function(data) {
+    //var ar = new Result([]);
+    connection.query("SELECT partidas_g from usuarios where Usuario='"+data+"'", function(err,result,fields){
+      if(err)throw err;
+      console.log(result[0].partidas_g);
+      //var res=result[0].partidas_g;
+      var card ={
+        res: result[0].partidas_g,
+        player: data
+      }
+      io.sockets.emit('ganadas',card);
+    });
+  });
   socket.on('new-message', function(data) {
     io.sockets.emit('messages', data);
   });
