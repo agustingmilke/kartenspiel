@@ -8,7 +8,7 @@ var name;
 var ganadas=0;
 var friends;
 var connection = mysql.createConnection({
-     host: 'localhost',
+     host: '192.241.188.222',
      user: 'root',
      password: 'kartenspiel',
      database: 'kartenspiel',
