@@ -49,7 +49,7 @@ app.get('/hello', function(req, res) {
 io.on('connection', function(socket) {  
 	var datos={
 		name: name,
-		ganadas: ganadas
+		//ganadas: ganadas
 		//friends: friends
 	};
 	socket.emit('inicio',datos);

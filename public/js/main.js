@@ -444,7 +444,7 @@ function Crear(op){
 
     Sala = room.name;
     idplayer = 1;
-    player = "jugador "+ idplayer;
+    //player = "jugador "+ idplayer;
     turno = true;
     document.getElementById("room").innerHTML = Sala;
     document.getElementById("jugador").innerHTML = idplayer;
@@ -479,7 +479,7 @@ function unirse(name,IDP){
   idplayer = IDP+1;
   turno=false;
   document.getElementById("jugador").innerHTML = idplayer;
-  player = "jugador "+ idplayer;
+  //player = "jugador "+ idplayer;
 
   var user = {
       Sala: Sala,
