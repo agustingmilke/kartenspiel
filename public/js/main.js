@@ -5,7 +5,7 @@ var Turnos=[5];
 for(x=0;x<5;x++)
   Turnos[x]=false;
 socket.on('inicio',function(data){
-  player = 'milke';
+  player = data.name;
   //ganadas = data.ganadas;
  // friends = data.friends;
   alert(player);

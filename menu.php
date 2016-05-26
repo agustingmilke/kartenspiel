@@ -60,11 +60,9 @@
             <center>
             <form action="http://192.241.188.222:8080" method="GET">
                 <input name="name" type="hidden" value="<?php echo $_SESSION['usuario'];?>">
-                <!--<input name="friends" type="hidden" value="<?php //echo json_encode($amigos);?>">-->
-                <input name="ganadas" type="hidden" value="<?php echo $PG;?>">
                 <input class="bMenu" type="submit" value="Jugar" ><br> 
             </form>
-                <input class="bMenu" type="submit" value="Perfil" onclick = "location='Perfil.php'"><br>
+                <input class="bMenu" type="submit" value="Perfil" onclick = "location='perfil.php'"><br>
                 <input class="bMenu" type="submit" value="Amigos" onclick = "location='amigos.php'"><br>
                 <input class="bMenu" type="submit" value="Logros" onclick = "location='logros.php'"><br>
                 <input class="bMenu" type="submit" value="Configuracion" onclick = "location='partidas.php'"><br>
