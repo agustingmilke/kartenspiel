@@ -10,7 +10,7 @@ var friends;
 var connection = mysql.createConnection({
      host: 'localhost',
      user: 'root',
-     password: '',
+     password: 'kartenspiel',
      database: 'kartenspiel',
      //port: 3306
   });
