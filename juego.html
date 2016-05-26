@@ -1,0 +1,184 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>KartenSpiel</title>
+  <meta name="viewport" content="width=device-width, inicial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="css/style.css" media="all" type="text/css"/>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/play.js"></script>
+  <script type="text/javascript">    
+  var bPreguntar = true;
+     
+    window.onbeforeunload = preguntarAntesDeSalir;
+     
+    function preguntarAntesDeSalir()
+    {
+      if (bPreguntar){
+        Abandono()
+        return "¿Seguro que quieres salir?";
+      }
+        
+    }
+   
+     </script>
+     
+</head>
+<body align="center" style="background-image: url(images/Fondo_5.jpg)">
+	<div id="status"></div>
+
+  <div id="modo">
+  <SECTION class="login">
+    <input class="bMenu" type="submit" value="Iniciar Partida" onclick = "MostrarSalas()"><br>
+    <input class="bMenu" type="submit" value="Crear Sala" onclick = "MostrarCrear()"><br>
+    </SECTION>
+  </div>
+  <div id="Salas">
+  <div class="volver" onclick="MostrarModo()"><img src="images/volver.png"width="60" height="60"></div>
+  <SECTION class="login">
+  <h1>Salas disponibles</h1>
+    <div id="listaSalas">
+   
+    </div>
+  </SECTION>
+  </div>
+  <div id="crearSalas">
+  <div class="volver" onclick="MostrarModo()"><img src="images/volver.png"width="60" height="60"></div>
+  <SECTION class="login">
+      <center><h1>Crear Sala</h1></center>
+      <center><img class='logros' src='images/linea.png' width='300px' height='20px'></center>
+      <br><br><br>
+        <center><input class="sala" id="room" type="text" placeholder="Nombre de la Sala">
+        <br><br><br><br>
+        <input class="btnCircular" type="submit" value="Amigos" onclick="Crear(0)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input class="btnCircular" type="submit" value="Todos" onclick="Crear(1)">
+        </center>
+    </SECTION>
+  
+  </div>
+  <div id="Usuarios">
+    <SECTION class="login">
+    <div id="name_room"></div>
+    <div id="listaUsuarios">
+      
+    </div>
+    <div id="empezar"></div>
+  </SECTION>
+  </div>
+  <div id="Seleccion">
+  <div class="volverS" onclick="MostrarSalas()"><img src="images/volver.png"width="60" height="60"></div>
+  <center>
+ <table>
+    <tr>
+      <td id="S1" onclick="Selection(1)"><img src="images/Carta_1_1.jpg" width="120" height="180"></td>
+      <td></td>
+      <td><div id='S4' onclick='Selection(4)' style='background-image: url(images/Fondo_1.jpg); height: 180px; width: 280px'></div></td>
+      <td></td>
+      <td rowspan= 2 id="MuestraF" style="background-image: url(images/Fondo_1.jpg); height: 300px; width: 220px;"><div id="MuestraC" align="center"><img src="images/Carta_1_1.jpg" width="120" height="180"></div></td>
+    </tr>
+    <tr>
+      <td id="S2">
+      </td> 
+      <td id="Mas"><img src="images/mas.png"width="180" height="180"></td>
+      <td id="S5">
+      </td>-->
+      <td id="Igual"><img src="images/igual.png"width="180" height="180"></td>
+    </tr>
+    <tr>
+      <td id="S3">
+      </td>
+      <td></td>
+      <td id="S6">
+      </td>
+      <td></td>
+      <td id="Aceptar" onclick="MostrarJuego()"><img src="images/aceptar.png"width="180" height="180"></td>
+    </tr>
+  </table>
+</center>
+
+  </div>
+  <div id ="content" align="center" >
+  	<div id="board" >
+      <table id="scores">
+	      <td>
+	      	<div id="Titulo">KartenSpiel</div>
+	      </td>
+        <td>
+        Sala: 
+        </td>
+        <td>
+          <div id="Sala"></div>
+        </td>
+	      <td>
+	      Jugador: 
+	      </td>
+	      <td>
+	      	<div id="jugador"></div>
+	      </td>
+	      <td>
+	      Turno: 
+	      </td>
+	      <td>
+	      	<div id="Turno"></div>
+	      </td>     
+      </table>
+      <center>
+      <table id="player">
+        <tr>
+          <td id="torreB"></td>
+          <td id="jugadorB"></td>
+          <td>         </td>
+          <td id="torreC"></td>
+          <td id="jugadorC"></td>
+          <td>         </td>
+          <td id="torreD"></td>
+          <td id="jugadorD"></td>
+        </tr>
+        <tr>
+          <td colspan = 2 id="usuarioB"> </td>
+          <td></td>
+          <td colspan = 2 id="usuarioC"> </td>
+          <td></td>
+          <td colspan = 2 id="usuarioD"> </td>
+        </tr>      
+      </table>
+      </center>  
+        <div class="rows">
+            <div id="p0" onclick="CheckCell(14,0)" class="cell descendente"><div id="P0"class="horizontal"></div></div>
+            <div id="p1" onclick="CheckCell(13,0)" class="cell descendente"><div id="P1"class="horizontal"></div></div>
+            <div id="mz0" onclick="CheckCell(12,5)" class="cell mazo"><div id="MZ" class="vertical"></div></div>
+            <div id="p2" onclick="CheckCell(11,1)" class="cell ascendente"><div id="P2"class="horizontal"></div></div>
+            <div id="p3" onclick="CheckCell(10,1)" class="cell ascendente"><div id="P3"class="horizontal"></div></div>
+            <div id="a0" onclick="CheckCell(9,2)" class="cell almacen"><div id="A0"class="vertical"></div></div>
+            <div id="a1" onclick="CheckCell(8,2)" class="cell almacen"><div id="A1"class="vertical"></div></div>
+            <div id="a2" onclick="CheckCell(7,2)" class="cell almacen"><div id="A2"class="vertical"></div></div>
+            <div id="t"  onclick="CheckCell(6,3)" class="cell torre"><div id="T" class="vertical"></div></div>
+            <div id="m0" onclick="CheckCell(0,4)" class="cell mano"><div id="M0"class="horizontal"></div></div>
+            <div id="m1" onclick="CheckCell(1,4)" class="cell mano"><div id="M1"class="horizontal"></div></div>
+            <div id="m2" onclick="CheckCell(2,4)" class="cell mano"><div id="M2"class="horizontal"></div></div>
+            <div id="m3" onclick="CheckCell(3,4)" class="cell mano"><div id="M3"class="horizontal"></div></div>
+            <div id="m4" onclick="CheckCell(4,4)" class="cell mano"><div id="M4"class="horizontal"></div></div>
+            <div id="m5" onclick="CheckCell(5,4)" class="cell mano"><div id="M5"class="horizontal"></div></div>
+        </div>  
+        <div id="chat">
+          <div id="salir"></div>
+          <div id="messages"style="width:250px; height:450px; overflow: auto; overflow-x : hidden;" >
+  
+          </div>
+				  <form onsubmit="return addMessage(this)">
+				    <input type="text" id="texto" placeholder="Cuéntanos algo...">
+				    <input type="submit" value="+">
+				  </form>
+			 </div>
+		</div>
+    <div id="ganador"align="center">
+
+    </div>
+  </div>
+  
+  <script src="js/play.js"></script>
+  
+</body>
+</html>

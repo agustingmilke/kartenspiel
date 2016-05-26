@@ -1,0 +1,102 @@
+body.seccion{
+        background-color:#dddddd;
+}
+
+nav{
+	float: left;
+    width: 200px;
+    height:600px;
+    background-color: #666;
+}
+
+input[type="button"]{
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: .4s;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+input[type="button"].editar{
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: .4s;
+    border-radius: 2px;
+    cursor: pointer;
+    background-color: #333333;
+}
+
+
+
+iframe{
+    border:none;
+}
+
+div.seccion{
+	width: 100%;
+	height: 150px;
+	width: 300px;
+	border-style: inset;
+}
+
+footer {
+    background-color:#999793;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px;	 	 
+}
+
+img{
+    width:200px;
+    height: 200px;
+
+}
+
+div.imagen{
+
+}
+
+div.boton{
+
+}
+
+#menu ul{
+    list-style-type: none;
+    margin:0px;
+    padding:0px;
+    width:200px;
+    font-family:arial,sans-serif;
+    font-size:11pt;
+}
+
+#menu ul li{
+    background-color:#666;
+}
+
+#menu ul li a{
+    color:#ccc;
+    text-decoration: none;
+    text-transform: uppercase;
+    display:block;
+    padding: 10px 10px 10px 20px;
+}
+
+#menu ul li a:hover{
+    background:#000;
+    border-left: 10px solid #333;
+    color:#fff;
+}
+

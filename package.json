@@ -1,0 +1,17 @@
+{
+  "name": "kartenspiel",
+  "version": "0.1.0",
+  "description": "proyecto kartenspiel",
+  "main": "app.js",
+  "author": "Agustin Gonzalez Milke <agustingmilke@gmail.com>",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "dependencies": {
+    "express": "^3.21.2",
+    "socket.io": "^0.9.17"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.2"
+  }
+}
