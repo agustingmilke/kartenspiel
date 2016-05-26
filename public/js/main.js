@@ -1,4 +1,4 @@
-var socket = io.connect('http://localhost:8080', { 'forceNew': true });
+var socket = io.connect('http://192.241.188.222:8080', { 'forceNew': true });
 
 var rooms =[];
 var Turnos=[5];
