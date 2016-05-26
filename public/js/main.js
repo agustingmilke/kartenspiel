@@ -8,7 +8,7 @@ socket.on('inicio',function(data){
   player = data.name;
   //ganadas = data.ganadas;
  // friends = data.friends;
-  //alert(player);
+  alert(player);
   //alert(ganadas);
   //alert(friends);
   
