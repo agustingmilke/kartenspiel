@@ -8,7 +8,7 @@
     else{
         echo "primero inicia sesion";
     }
-    $con = mysqli_connect("localhost", "root", "", "kartenspiel");
+    $con = mysqli_connect("localhost", "root", "kartenspiel", "kartenspiel");
     $consulta = mysqli_query($con, "select * from amigos where Usuario='".$_SESSION['usuario']."'");
     $amigos = array();
     if ($row = mysqli_fetch_array($consulta, MYSQLI_ASSOC)){ 

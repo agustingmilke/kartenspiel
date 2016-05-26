@@ -1,6 +1,6 @@
 <?php
 
-		$con = mysqli_connect("localhost", "root", "", "kartenspiel");  
+		$con = mysqli_connect("localhost", "root", "kartenspiel", "kartenspiel");  
         session_start();
 
         $consulta = mysqli_query($con, "select Usuario from usuarios where Usuario='".  $_POST["amigo"]  ."' ");

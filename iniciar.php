@@ -1,7 +1,7 @@
 
 <?php
     if (isset($_POST["password"]) && isset($_POST["usuario"])) {
-        $con = mysqli_connect("localhost", "root", "", "kartenspiel");  
+        $con = mysqli_connect("localhost", "root", "kartenspiel", "kartenspiel");  
         $consulta = mysqli_query($con, "select * from usuarios where Usuario='".  $_POST["usuario"]  ."' and Contrasena='".  $_POST["password"]  ."'");
         if (mysqli_num_rows($consulta) > 0) {
             session_start();

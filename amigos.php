@@ -14,7 +14,7 @@
             echo "no hay";
         }
 
-        $con = mysqli_connect("localhost", "root", "", "kartenspiel");  
+        $con = mysqli_connect("localhost", "root", "kartenspiel", "kartenspiel");  
         $consulta = mysqli_query($con, "select Amigo from amigos where Usuario='".  $_SESSION['usuario']  ."'");
     
 

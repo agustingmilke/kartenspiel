@@ -13,7 +13,7 @@
             echo "no hay";
         }
 
-        $con = mysqli_connect("localhost", "root", "", "kartenspiel");  
+        $con = mysqli_connect("localhost", "root", "kartenspiel", "kartenspiel");  
         $consulta = mysqli_query($con, "select partidas_g from usuarios where Usuario = '".$_SESSION['usuario']."'");
     	if($row = mysqli_fetch_array($consulta, MYSQLI_ASSOC)){
 			$x = $row['partidas_g'];

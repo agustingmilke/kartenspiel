@@ -1,7 +1,7 @@
 <?php
     
     if(isset($_POST["action"])){
-        $con = mysqli_connect("localhost", "root", "", "kartenspiel");
+        $con = mysqli_connect("localhost", "root", "kartenspiel", "kartenspiel");
         if($_POST['action'] == 'eliminar') {
             $consulta = mysqli_query($con, "DELETE FROM `usuarios` WHERE Usuario = '".$_POST["data"]."'");
         } 
@@ -23,7 +23,7 @@
 
 
         function ganadas(){
-            $con = mysqli_connect("localhost", "root", "", "kartenspiel");
+            $con = mysqli_connect("localhost", "root", "kartenspiel", "kartenspiel");
             $consulta = mysqli_query($con, "select partidas_g from usuarios where Usuario='".  $_SESSION['usuario']  ."'");
             if ($row = mysqli_fetch_array($consulta, MYSQLI_ASSOC)){ 
                do { 
@@ -36,7 +36,7 @@
             } 
         }
         function contrasena(){
-            $con = mysqli_connect("localhost", "root", "", "kartenspiel");
+            $con = mysqli_connect("localhost", "root", "kartenspiel", "kartenspiel");
             $consulta = mysqli_query($con, "select contrasena from usuarios where Usuario='".  $_SESSION['usuario']  ."'");
             if ($row = mysqli_fetch_array($consulta, MYSQLI_ASSOC)){ 
                do { 
@@ -49,7 +49,7 @@
             } 
         }
         function perdidas(){
-            $con = mysqli_connect("localhost", "root", "", "kartenspiel"); 
+            $con = mysqli_connect("localhost", "root", "kartenspiel", "kartenspiel"); 
             $consulta = mysqli_query($con, "select partidas_p from usuarios where Usuario='".  $_SESSION['usuario']  ."'");
             if ($row = mysqli_fetch_array($consulta, MYSQLI_ASSOC)){ 
                do { 
@@ -63,7 +63,7 @@
         }
 
         function correo(){
-            $con = mysqli_connect("localhost", "root", "", "kartenspiel");
+            $con = mysqli_connect("localhost", "root", "kartenspiel", "kartenspiel");
             $consulta = mysqli_query($con, "select correo from usuarios where Usuario='".  $_SESSION['usuario']  ."'");
             if ($row = mysqli_fetch_array($consulta, MYSQLI_ASSOC)){ 
                do { 
@@ -76,7 +76,7 @@
             } 
         }
         function conectar(){
-            $con = mysql_connect("localhost", "root", ""); 
+            $con = mysql_connect("localhost", "root", "kartenspiel"); 
             $base = mysql_select_db("kartenspiel", $con);    
             session_start();
         }
