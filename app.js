@@ -47,20 +47,23 @@ app.get('/hello', function(req, res) {
 });
 
 io.on('connection', function(socket) {  
-	var datos={
-		name: name,
-		//ganadas: ganadas
-		//friends: friends
-	};
-	socket.emit('inicio',datos);
-  	socket.emit('rooms',rooms);
+  var datos={
+    name: name,
+    ganadas: ganadas
+    //friends: friends
+  };
+  socket.emit('inicio',datos);
+    socket.emit('rooms',rooms);
+  
+  //console.log('Alguien se ha conectado con Sockets');
+
 
   socket.on('disconnect',function(){
-	 console.log("alguien se desconectooooo :C");
-	 /*if( socket.interval ){
+   console.log("alguien se desconectooooo :C");
+   /*if( socket.interval ){
             clearInterval( socket.interval );
         }*/
-  });	
+  }); 
   socket.on('new-ganadas', function(data) {
     //var ar = new Result([]);
     connection.query("SELECT partidas_g from usuarios where Usuario='"+data+"'", function(err,result,fields){
@@ -74,32 +77,34 @@ io.on('connection', function(socket) {
       io.sockets.emit('ganadas',card);
     });
   });
+
+    
   socket.on('new-message', function(data) {
     io.sockets.emit('messages', data);
   });
   socket.on('new-room',function(data){
-  	rooms.push(data);
-  	io.sockets.emit('rooms',rooms);
+    rooms.push(data);
+    io.sockets.emit('rooms',rooms);
   });
   socket.on('new-player',function(data){
-  	for(var x=0;x<rooms.length;x++){
-  		if(rooms[x].name==data){
-  			rooms[x].player++;
-  			if(rooms[x].player>=2){
-  				rooms[x].status=1;
-  			}
-  			if(rooms[x].player==4){
-  				rooms[x].status=2;
-  			}
-  		}
-  	}
-  	io.sockets.emit('rooms',rooms);
+    for(var x=0;x<rooms.length;x++){
+      if(rooms[x].name==data){
+        rooms[x].player++;
+        if(rooms[x].player>=2){
+          rooms[x].status=1;
+        }
+        if(rooms[x].player==4){
+          rooms[x].status=2;
+        }
+      }
+    }
+    io.sockets.emit('rooms',rooms);
   })
   socket.on('new-Tower',function(data){
     io.sockets.emit('Tower',data)
   })
   socket.on('new-Winner',function(data){
-  	io.sockets.emit('Winner',data)
+    io.sockets.emit('Winner',data)
   });
   socket.on('new-Desc',function(data){
     io.sockets.emit('Desc',data);
@@ -117,66 +122,66 @@ io.on('connection', function(socket) {
     io.sockets.emit('sigTurn',data);
   });
   socket.on('new-game',function(data){
-  	for(var x=0;x<rooms.length;x++){
-  		if(rooms[x].name==data){
-  			rooms[x].status=3;
-  			io.sockets.emit('sig-game',rooms[x]);
+    for(var x=0;x<rooms.length;x++){
+      if(rooms[x].name==data){
+        rooms[x].status=3;
+        io.sockets.emit('sig-game',rooms[x]);
 
-  		}
-  	}
-  	for(var x=0;x<users.length;x++){
-  		if(users[x].Sala==data){
-  			users[x].status=1;
-  		}
-  	}
-  	io.sockets.emit('sigUser',users);
-  	io.sockets.emit('rooms',rooms);
+      }
+    }
+    for(var x=0;x<users.length;x++){
+      if(users[x].Sala==data){
+        users[x].status=1;
+      }
+    }
+    io.sockets.emit('sigUser',users);
+    io.sockets.emit('rooms',rooms);
   })
   socket.on('new-user',function(data){
-  	users.push(data);
+    users.push(data);
     io.sockets.emit('sigUser',users);
   });
   socket.on('new-Username',function(data){
     io.sockets.emit('Username',data);
   });
   socket.on('new-reset',function(data){
-  	for(var x=0;x<rooms.length;x++){
-  		if(rooms[x].name==data.Sala){
-  			rooms[x].status=1;
-  			rooms[x].player=data.contador;
-  		}
-  	}
-  	for(var x=0;x<users.length;x++){
-  		if(users[x].Sala==data.Sala){
-  			users[x].status=0;
-  		}
-  	}
-  	io.sockets.emit('rooms',rooms);
-  	io.sockets.emit('sigUser',users);
-  	io.sockets.emit('reset',data.Sala);
+    for(var x=0;x<rooms.length;x++){
+      if(rooms[x].name==data.Sala){
+        rooms[x].status=1;
+        rooms[x].player=data.contador;
+      }
+    }
+    for(var x=0;x<users.length;x++){
+      if(users[x].Sala==data.Sala){
+        users[x].status=0;
+      }
+    }
+    io.sockets.emit('rooms',rooms);
+    io.sockets.emit('sigUser',users);
+    io.sockets.emit('reset',data.Sala);
   });
   socket.on('new-close',function(data){
-  	io.sockets.emit('close',data);
-  	for(var x=0;x<users.length;x++){
-  		if(users[x].Sala==data){
-  			users.splice(x,1);
-  		}
-  	}
-  	for(var x=0;x<rooms.length;x++){
-  		if(rooms[x].name==data){
-  			rooms.splice(x,1);
-  		}
-  	}
-  	io.sockets.emit('rooms',rooms);
+    io.sockets.emit('close',data);
+    for(var x=0;x<users.length;x++){
+      if(users[x].Sala==data){
+        users.splice(x,1);
+      }
+    }
+    for(var x=0;x<rooms.length;x++){
+      if(rooms[x].name==data){
+        rooms.splice(x,1);
+      }
+    }
+    io.sockets.emit('rooms',rooms);
   });
   socket.on('delete-User',function(data){
-  	io.sockets.emit('delUser',data);
-  	for(var x=0;x<users.length;x++){
-  		if(users[x].Sala==data.Sala){
-  			if(users[x].player==data.player)
-  				users.splice(x,1);
-  		}
-  	}
+    io.sockets.emit('delUser',data);
+    for(var x=0;x<users.length;x++){
+      if(users[x].Sala==data.Sala){
+        if(users[x].player==data.player)
+          users.splice(x,1);
+      }
+    }
   });
 
     
