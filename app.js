@@ -30,12 +30,12 @@ app.use(express.static(path.join(__dirname, 'public')));
       console.log(datos);*/
       //friends=req.query.friends;
       //ganadas=req.query.ganadas;  
-      connection.query("SELECT Amigo from amigos where Usuario='"+name+"'", function(err,rows,fields){
+      /*connection.query("SELECT Amigo from amigos where Usuario='"+name+"'", function(err,rows,fields){
         if(!err)
           console.log(rows);
         else
           console.log('error en la consulta');
-      });
+      });*/
        res.sendfile(__dirname+'/juego.html') ; 
        
     });

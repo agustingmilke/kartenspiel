@@ -32,6 +32,10 @@ h1{
     color: #387D7A ;
 }
 
+h1.header{
+    display: inline;
+}
+
 h2{
     font-size:150%;
     font-family: Charcoal, sans-serif;

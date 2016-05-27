@@ -26,7 +26,12 @@
 	<body background="img/url.jpg ">
 		<header>
 
-			<center><br><h1>KartenSpiel</h1><br></center>
+			<br>
+			<form method="post" action="metodos.php">
+				<input type="hidden" name="action" value="cerrar_sesion">
+				<input class="bMenu" type="submit" value="Cerrar Sesion" style="font-size:15px; padding:2px 2px; margin-top:0px; margin-left:30px; position:absolute; width: 130px; height: 32px">
+			</form>
+			<center><h1 class="header">KartenSpiel</h1><br><br></center>
 
 		</header>
 
@@ -37,6 +42,7 @@
 					<li><a href="usuarios.php" > Usuarios</a></li>
 					<li><a href="comentarios.php" > Comentarios</a></li>
 					<li><a href="usuariosRegistrados.php"> Registros</a></li>
+					<li><a href="partidasJugadas.php"> Partidas</a></li>
 				</ul>
 			</div>
 			

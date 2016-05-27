@@ -12,7 +12,7 @@
             $row = mysqli_fetch_array($consulta, MYSQLI_ASSOC);
 
             if($row["Tipo"] == 1){
-                echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=menu.php'> ";
+                echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=usuario/menu.php'> ";
             }
             else{
                 echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=administrador/usuarios.php'> ";

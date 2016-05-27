@@ -27,8 +27,8 @@
         } 
         
         if($_POST['action'] == 'registrar') {
-            $sql = "INSERT INTO `usuarios`(`Usuario`, `Contrasena`, `Nombre`, `Correo`, `Tipo`, `partidas_g`, `partidas_p`) 
-                VALUES ('".$_POST["usuario"]."','".$_POST["clave"]."','".$_POST["nombre"]."','".$_POST["correo"]."',1,0,0)";
+            $sql = "INSERT INTO `usuarios`(`Usuario`, `Contrasena`, `Nombre`, `Correo`, `Tipo`, `partidas_g`, `partidas_p`, `partidas_t`) 
+                VALUES ('".$_POST["usuario"]."','".$_POST["clave"]."','".$_POST["nombre"]."','".$_POST["correo"]."',1,0,0,0)";
             $sql2 ="SELECT codigo FROM codigo WHERE Usuario = '".$_POST["usuario"]."'";
             $consulta = mysqli_query($con, $sql2);
             if($row = mysqli_fetch_array($consulta, MYSQLI_ASSOC)){
@@ -68,7 +68,7 @@
 
 
                     //aqui termina lo de la fecha
-                    echo "<META HTTP-EQUIV='REFRESH' CONTENT='0;URL=usuario/menu.php'> ";
+                    echo "<META HTTP-EQUIV='REFRESH' CONTENT='0;URL=usuario/menu.html'> ";
                 }
                 else{
                     echo "<script>alert('El codigo no es correcto');</script>";
@@ -80,8 +80,9 @@
         
         if($_POST["action"]=="solicitar"){
             $consulta = mysqli_query($con, "select Usuario from usuarios where Usuario='".  $_POST["amigo"]  ."' ");
-            $result=mysql_query("SELECT count(*) as total from AMIGOS WHERE Usuario = '".$_SESSION."'");
+            $result=mysql_query("SELECT count(*) as total from AMIGOS WHERE Usuario = ".$_SESSION."");
             $data=mysql_fetch_assoc($result);
+
             $max = mysqli_query($con, "select * from amigos where Usuario='".  $_POST["amigo"]  ."' ");
             if($data==20){
                 echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=amigos.php'> ";
@@ -228,6 +229,7 @@
                 echo "¡ No se ha encontrado ningún registro !"; 
             } 
         }
+
 
     }
 

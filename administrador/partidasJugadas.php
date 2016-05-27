@@ -9,14 +9,14 @@
     }
     else
     {
-        //echo "no hay";
+        echo "no hay";
     }
 
     $con = mysqli_connect("localhost", "root", "kartenspiel", "kartenspiel");
     //$consulta = mysqli_query($con, "select * from amigos where Usuario='".$_SESSION['usuario']."'");
     
-    $consulta = mysqli_query($con, "select * from registros");
-    $consulta2 = mysqli_query($con, "Select Year From registros Group By Year Having Count(*) > 1 Order By Year");
+    $consulta = mysqli_query($con, "select * from juegos");
+    $consulta2 = mysqli_query($con, "Select Year From juegos Group By Year Having Count(*) > 1 Order By Year");
     $año = array();
     $cont = 0;
     if ($row = mysqli_fetch_array($consulta, MYSQLI_ASSOC)){ 
@@ -46,7 +46,8 @@
 
 	$graph->SetTheme($theme_class);
 	$graph->img->SetAntiAliasing(false);
-	$graph->title->Set('Registro de Usuarios en KartenSpiel');
+	$graph->title->Set('Partidas de KartenSpiel');
+	$graph->yaxis->title->Set("Juegos Realizados");
 	$graph->SetBox(false);
 
 	$graph->img->SetAntiAliasing();
@@ -71,13 +72,14 @@
 		$graph->Add($p1);	
 	}
 
+
 	$graph->legend->SetFrameWeight(1);
 
 	// Output line
 	//$graph->Stroke();
-	@unlink("registros.png");
+	@unlink("juegos.png");
 	
-	$graph->Stroke("registros.png");
+	$graph->Stroke("juegos.png");
     ?>
 <html>
 	<head>
@@ -89,9 +91,9 @@
 		<header>
 
 			<br>
-			<form method="post" action="metodos.php"  style="display:inline;">
+			<form method="post" action="metodos.php" style="display:inline;">
 				<input type="hidden" name="action" value="cerrar_sesion">
-				<input class="bMenu" type="submit" value="Cerrar Sesion" style="font-size:15px; padding:2px 2px; margin-top:0px; margin-left:30px; position:absolute; width: 130px; height: 32px">
+				<input class="bMenu" type="submit" value="Cerrar Sesion" style="font-size:15px; padding:2px 2px; margin-top:0px; margin-left:30px; position: absolute; width: 130px; height: 32px;">
 			</form>
 			<center><h1 class="header">KartenSpiel</h1><br><br></center>
 
@@ -110,7 +112,7 @@
 		</nav>
 		<section>
 			<br><br>
-			<img class="registros" src="registros.png" alt="" border="0">
+			<img class="registros" src="juegos.png" alt="" border="0">
 		</section>
 		
 

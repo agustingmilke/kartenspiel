@@ -29,8 +29,8 @@
                     <input name= "password" type="password" align="center" placeholder="Clave"><br><br>
                     <input name= "login" class="bMenu" type="Submit" value="Iniciar Sesion"><br><br><br>
                 </form>
-                <h3><a href="Registro.html">Registrarse</a></h3>
-                <h3><a href="Recuperar_contraseña.html">&iquestHas olvidado tu contrase&ntildea?</a></h3>
+                <h3><a href="registro.php">Registrarse</a></h3>
+                <h3><a href="Recuperar_contrasena.html">&iquestHas olvidado tu contrase&ntildea?</a></h3>
                 <h3><a href="Reglas.html">Reglas del juego</a></h3>
                 <h3><a href="Descripcion.html">Descripcion del juego</a></h3>
             </center>
