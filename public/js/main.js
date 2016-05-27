@@ -478,7 +478,7 @@ function unirse(name,IDP){
   var user = {
       player: player,
       Sala: Sala,
-      //status: 0
+      status: 0
     }
     socket.emit('new-user',user);
   MostrarUsuarios()
