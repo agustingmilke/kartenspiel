@@ -7,6 +7,8 @@ var mysql   = require('mysql');
 var rooms = [];
 var users = [];
 var name;
+var res;
+var g;
 var connection = mysql.createConnection({
      host: 'localhost',
      user: 'root',
@@ -25,36 +27,8 @@ app.use(express.static(path.join(__dirname, 'public')));
     app.get('/',function(req,res){
       console.log(req.query);
       name=req.query.name;
-      var user = {
-        player: name,
-        Sala: '',
-        status: ''
-      }
-      bandera = 0;
-      for(var x=0;x<users.length;x++){
-        if(users[x].player==name){
-          alert("El jugador "+name+" ya esta jugando");
-          bandera = 1;
-        }
-      }
-      if(bandera==0){
-        users.push(user);
-        console.log(name);
-        /*var datos = connection.query("SELECT Amigo from amigos where Usuario='"+name+"'");
-        console.log(datos);*/
-        //friends=req.query.friends;
-        //ganadas=req.query.ganadas;  
-        /*connection.query("SELECT Amigo from amigos where Usuario='"+name+"'", function(err,rows,fields){
-          if(!err)
-            console.log(rows);
-          else
-            console.log('error en la consulta');
-        });*/
-       res.sendfile(__dirname+'/juego.html') ; 
-      }
-      else{
-        res.sendfile('http://192.241.188.222/kartenspiel/usuario/menu.php') ;
-      }
+      res.sendfile(__dirname+'/juego.html') ;
+      
     });
 app.use(express.static('public'));
 app.get('/hello', function(req, res) {  
@@ -114,6 +88,15 @@ io.on('connection', function(socket) {
     io.sockets.emit('Tower',data)
   })
   socket.on('new-Winner',function(data){
+    connection.query("SELECT partidas_g from usuarios where Usuario='"+data.player+"'", function(err,result,fields){
+      if(err)throw err;
+      console.log(result[0].partidas_g);
+      g=result[0].partidas_g;
+      console.log(g);
+      g++;
+      console.log(g);
+      connection.query("UPDATE usuarios SET partidas_g="+g+" WHERE Usuario='"+data.player+"'");
+    });
     io.sockets.emit('Winner',data)
   });
   socket.on('new-Desc',function(data){
@@ -187,10 +170,10 @@ io.on('connection', function(socket) {
   socket.on('delete-User',function(data){
     io.sockets.emit('delUser',data);
     for(var x=0;x<users.length;x++){
-      if(users[x].Sala==data.Sala){
+      //if(users[x].Sala==data.Sala){
         if(users[x].player==data.player)
           users.splice(x,1);
-      }
+      //}
     }
   });
 
