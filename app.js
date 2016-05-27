@@ -4,9 +4,9 @@ var path = require('path');
 var server = require('http').Server(app);
 var io = require('socket.io').listen(server);
 var mysql   = require('mysql');
+var rooms = [];
+var users = [];
 var name;
-var ganadas=0;
-var friends;
 var connection = mysql.createConnection({
      host: 'localhost',
      user: 'root',
@@ -25,34 +25,44 @@ app.use(express.static(path.join(__dirname, 'public')));
     app.get('/',function(req,res){
       console.log(req.query);
       name=req.query.name;
-      console.log(name);
-      /*var datos = connection.query("SELECT Amigo from amigos where Usuario='"+name+"'");
-      console.log(datos);*/
-      //friends=req.query.friends;
-      //ganadas=req.query.ganadas;  
-      /*connection.query("SELECT Amigo from amigos where Usuario='"+name+"'", function(err,rows,fields){
-        if(!err)
-          console.log(rows);
-        else
-          console.log('error en la consulta');
-      });*/
+      var user = {
+        player: name,
+        Sala: '',
+        status: ''
+      }
+      bandera = 0;
+      for(var x=0;x<users.length;x++){
+        if(users[x].player==name){
+          alert("El jugador "+name+" ya esta jugando");
+          bandera = 1;
+        }
+      }
+      if(bandera==0){
+        users.push(user);
+        console.log(name);
+        /*var datos = connection.query("SELECT Amigo from amigos where Usuario='"+name+"'");
+        console.log(datos);*/
+        //friends=req.query.friends;
+        //ganadas=req.query.ganadas;  
+        /*connection.query("SELECT Amigo from amigos where Usuario='"+name+"'", function(err,rows,fields){
+          if(!err)
+            console.log(rows);
+          else
+            console.log('error en la consulta');
+        });*/
        res.sendfile(__dirname+'/juego.html') ; 
-       
+      }
+      else{
+        res.sendfile('http://192.241.188.222/kartenspiel/usuario/menu.php') ;
+      }
     });
-var rooms = [];
-var users = [];
 app.use(express.static('public'));
 app.get('/hello', function(req, res) {  
   res.status(200).send("Hello World!");
 });
 
 io.on('connection', function(socket) {  
-  var datos={
-    name: name,
-    ganadas: ganadas
-    //friends: friends
-  };
-  socket.emit('inicio',datos);
+  socket.emit('inicio',name);
     socket.emit('rooms',rooms);
   
   //console.log('Alguien se ha conectado con Sockets');
