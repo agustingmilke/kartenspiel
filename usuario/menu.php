@@ -33,11 +33,11 @@
             <center><img class='logros' src='img/linea.png' width='300px' height='20px'></center>
             <br>
             <center>
-            <form action="http://localhost:8080" method="GET">
+            <form action="http://192.241.188.222:8080" method="GET">
                 <input name="name" type="hidden" value="<?php echo $_SESSION['usuario'];?>">
                 <input class="bMenu" type="submit" value="Jugar" ><br> 
             </form>
-                <input class="bMenu" type="submit" value="Perfil" onclick = "location='Perfil.php'"><br>
+                <input class="bMenu" type="submit" value="Perfil" onclick = "location='perfil.php'"><br>
                 <input class="bMenu" type="submit" value="Amigos" onclick = "location='amigos.php'"><br>
                 <input class="bMenu" type="submit" value="Logros" onclick = "location='logros.php'"><br>
                 <input class="bMenu" type="submit" value="Configuracion" onclick = "location='configuracion.php'"><br>

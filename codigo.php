@@ -17,7 +17,7 @@ if (isset($_POST["clave"]) && isset($_POST["usuario"]) && isset($_POST["correo"]
             	echo "<script>alert('Se envio el codigo');</script>";
             }
             else{
-
+                echo "<script>alert('no se envio el codigo');</script>";
             }
             echo "".$codigo."";
             $sql2 ="SELECT * FROM codigo WHERE Usuario = '".$_POST["usuario"]."'";
