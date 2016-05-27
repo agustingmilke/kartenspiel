@@ -10,8 +10,7 @@ socket.on('inicio',function(data){
  // friends = data.friends;
   alert(player);
   //alert(ganadas);
-  //alert(friends);
-  
+  //alert(friends);  
 })
 socket.on('ganadas',function(data){
   //alert(data);
@@ -41,7 +40,6 @@ socket.on('ganadas',function(data){
       document.getElementById("S6").innerHTML = "<div id='s6' style='background-image: url(images/Fondo_3.jpg); height: 180px; width: 280px'><div align='center'><br><img src='images/candado.png' width='200' height='130'></div></div>";
     }
   }
-    
 })
 socket.on('Username',function(data){
   if(data.Sala==Sala){

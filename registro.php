@@ -41,7 +41,7 @@
         	<h1 align="center">Registro</h1>
             <center><img class='logros' src='img/linea.png' width='300px' height='20px'></center>
             <br>
-            <form action = "codigo.php" method="post" onsubmit = "return validar()">
+            <form action = "pruebacorreo.php" method="post" onsubmit = "return validar()">
             <center> 
                 <table width="50%">
                     <tr>
