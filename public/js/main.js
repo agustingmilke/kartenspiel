@@ -5,12 +5,7 @@ var Turnos=[5];
 for(x=0;x<5;x++)
   Turnos[x]=false;
 socket.on('inicio',function(data){
-  player = data.name;
-  //ganadas = data.ganadas;
- // friends = data.friends;
-  alert(player);
-  //alert(ganadas);
-  //alert(friends);  
+  player = data;  
 })
 socket.on('ganadas',function(data){
   //alert(data);
@@ -40,6 +35,7 @@ socket.on('ganadas',function(data){
       document.getElementById("S6").innerHTML = "<div id='s6' style='background-image: url(images/Fondo_3.jpg); height: 180px; width: 280px'><div align='center'><br><img src='images/candado.png' width='200' height='130'></div></div>";
     }
   }
+    
 })
 socket.on('Username',function(data){
   if(data.Sala==Sala){
@@ -480,9 +476,9 @@ function unirse(name,IDP){
   //player = "jugador "+ idplayer;
 
   var user = {
-      Sala: Sala,
       player: player,
-      status: 0
+      Sala: Sala,
+      //status: 0
     }
     socket.emit('new-user',user);
   MostrarUsuarios()

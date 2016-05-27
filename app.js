@@ -28,20 +28,49 @@ app.use(express.static(path.join(__dirname, 'public')));
       console.log(req.query);
       name=req.query.name;
       res.sendfile(__dirname+'/juego.html') ;
+      /*var user = {
+        player: name,
+        Sala: '',
+        status: ''
+      }
+      bandera = 0;
+      for(var x=0;x<users.length;x++){
+        if(users[x].player==name){
+          console.log("El jugador "+name+" ya esta jugando");
+          bandera = 1;
+          users.push(user);
+        }
+      }
+      if(bandera==0){
+        
+        console.log(name);/*
+        /*var datos = connection.query("SELECT Amigo from amigos where Usuario='"+name+"'");
+        console.log(datos);*/
+        //friends=req.query.friends;
+        //ganadas=req.query.ganadas;  
+        /*connection.query("SELECT Amigo from amigos where Usuario='"+name+"'", function(err,rows,fields){
+          if(!err)
+            console.log(rows);
+          else
+            console.log('error en la consulta');
+        });*/
+      /* res.sendfile(__dirname+'/juego.html') ; 
+      }
+      else{
+        res.sendfile(__dirname+'/denegado.html') ;
+      }*/
       
+       
     });
+
 app.use(express.static('public'));
 app.get('/hello', function(req, res) {  
   res.status(200).send("Hello World!");
 });
-
 io.on('connection', function(socket) {  
   socket.emit('inicio',name);
     socket.emit('rooms',rooms);
-  
   //console.log('Alguien se ha conectado con Sockets');
-
-
   socket.on('disconnect',function(){
    console.log("alguien se desconectooooo :C");
    /*if( socket.interval ){
@@ -60,9 +89,7 @@ io.on('connection', function(socket) {
       }
       io.sockets.emit('ganadas',card);
     });
-  });
-
-    
+  }); 
   socket.on('new-message', function(data) {
     io.sockets.emit('messages', data);
   });
@@ -97,7 +124,8 @@ io.on('connection', function(socket) {
       console.log(g);
       connection.query("UPDATE usuarios SET partidas_g="+g+" WHERE Usuario='"+data.player+"'");
     });
-    io.sockets.emit('Winner',data)
+      
+    io.sockets.emit('Winner',data);
   });
   socket.on('new-Desc',function(data){
     io.sockets.emit('Desc',data);
@@ -131,6 +159,12 @@ io.on('connection', function(socket) {
     io.sockets.emit('rooms',rooms);
   })
   socket.on('new-user',function(data){
+    /*for(var x=0;x<users.length;x++){
+      if(users[x].player==data.player){
+        users[x].Sala=data.Sala;
+        users[x].status=0;
+      }
+    }*/
     users.push(data);
     io.sockets.emit('sigUser',users);
   });
@@ -170,14 +204,12 @@ io.on('connection', function(socket) {
   socket.on('delete-User',function(data){
     io.sockets.emit('delUser',data);
     for(var x=0;x<users.length;x++){
-      //if(users[x].Sala==data.Sala){
+      if(users[x].Sala==data.Sala){
         if(users[x].player==data.player)
           users.splice(x,1);
-      //}
+      }
     }
-  });
-
-    
+  });  
 });
 
 server.listen(8080, function() {  
