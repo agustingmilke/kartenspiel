@@ -165,7 +165,7 @@ socket.on('Desc',function(data){
     if(data.value==1){
     board[data.position]=null;
     document.getElementById(`P${data.cell}`).innerHTML = "";
-    document.getElementById(`P${data.cell}`).style.visibility="hidden";
+    //document.getElementById(`P${data.cell}`).style.visibility="hidden";
     }
     else{
       board[data.position]= data.value;
@@ -178,7 +178,7 @@ socket.on('Asc',function(data){
     if(data.value==12){
       board[data.position]=null;
       document.getElementById(`P${data.cell}`).innerHTML = "";
-      document.getElementById(`P${data.cell}`).style.visibility="hidden";
+      //document.getElementById(`P${data.cell}`).style.visibility="hidden";
     }
     else{
       board[data.position]= data.value;

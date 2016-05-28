@@ -43,7 +43,7 @@ function CheckCell(x,z){
 					i=13;
 					board[x]=null;
 					M.innerHTML="";
-					M.style.visibility="hidden";
+					//M.style.visibility="hidden";
 				}
 				if(q==2){
 						q=4;
@@ -64,7 +64,7 @@ function CheckCell(x,z){
 						else{
 							N = document.getElementById("M"+s);
 							N.innerHTML="";
-							N.style.visibility="hidden";
+							//N.style.visibility="hidden";
 						}			
 				}
 				else if(q==0){
@@ -86,7 +86,7 @@ function CheckCell(x,z){
 						board[s]=13;
 						i=13;
 						N.innerHTML="";
-						N.style.visibility="hidden";
+						//N.style.visibility="hidden";
 						addWinner(Sala,player)
 					}
 				}
@@ -110,7 +110,7 @@ function CheckCell(x,z){
 					i=13;
 					board[x]=null;
 					M.innerHTML="";
-					M.style.visibility="hidden";
+					//M.style.visibility="hidden";
 				}
 				if(q==2){
 					q=4;
@@ -131,7 +131,7 @@ function CheckCell(x,z){
 						else{
 							N = document.getElementById("M"+s);
 							N.innerHTML="";
-							N.style.visibility="hidden";
+							//N.style.visibility="hidden";
 						}						
 				}
 				else if(q==0){
@@ -153,7 +153,7 @@ function CheckCell(x,z){
 						board[s]=13;
 						i=13;
 						N.innerHTML="";
-						N.style.visibility="hidden";
+						//N.style.visibility="hidden";
 						addWinner(Sala,player)
 					}
 				}
@@ -170,7 +170,7 @@ function CheckCell(x,z){
 				board[s]=13;
 				i=13;
 				N.innerHTML="";
-				N.style.visibility="hidden";
+				//N.style.visibility="hidden";
 				turno=false;
 				w=1;
 			}
