@@ -27,8 +27,8 @@
         } 
         
         if($_POST['action'] == 'registrar') {
-            $sql = "INSERT INTO `usuarios`(`Usuario`, `Contrasena`, `Nombre`, `Correo`, `Tipo`, `partidas_g`, `partidas_p`) 
-                VALUES ('".$_POST["usuario"]."','".$_POST["clave"]."','".$_POST["nombre"]."','".$_POST["correo"]."',1,0,0)";
+            $sql = "INSERT INTO `usuarios`(`Usuario`, `Contrasena`, `Nombre`, `Correo`, `Tipo`, `partidas_g`, `partidas_p`, `partidas_t`) 
+                VALUES ('".$_POST["usuario"]."','".$_POST["clave"]."','".$_POST["nombre"]."','".$_POST["correo"]."',1,0,0,0)";
             $sql2 ="SELECT codigo FROM codigo WHERE Usuario = '".$_POST["usuario"]."'";
             $consulta = mysqli_query($con, $sql2);
             if($row = mysqli_fetch_array($consulta, MYSQLI_ASSOC)){
@@ -68,7 +68,7 @@
 
 
                     //aqui termina lo de la fecha
-                    echo "<META HTTP-EQUIV='REFRESH' CONTENT='0;URL=usuario/menu.php'> ";
+                    echo "<META HTTP-EQUIV='REFRESH' CONTENT='0;URL=usuario/menu.html'> ";
                 }
                 else{
                     echo "<script>alert('El codigo no es correcto');</script>";
@@ -80,8 +80,9 @@
         
         if($_POST["action"]=="solicitar"){
             $consulta = mysqli_query($con, "select Usuario from usuarios where Usuario='".  $_POST["amigo"]  ."' ");
-            $result=mysql_query("SELECT count(*) as total from AMIGOS WHERE Usuario = '".$_SESSION."'");
+            $result=mysql_query("SELECT count(*) as total from AMIGOS WHERE Usuario = ".$_SESSION."");
             $data=mysql_fetch_assoc($result);
+
             $max = mysqli_query($con, "select * from amigos where Usuario='".  $_POST["amigo"]  ."' ");
             if($data==20){
                 echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=amigos.php'> ";
@@ -103,18 +104,27 @@
         }
 
         if($_POST["action"]=='aceptar'){
-            $result=mysql_query("SELECT count(*) as total from AMIGOS WHERE Usuario = ".$_SESSION."");
-            $data=mysql_fetch_assoc($result);
+            $result=mysqli_query($con, "SELECT count(*) as total from amigos WHERE Usuario = '".$_SESSION["usuario"]."'");
+            $data=mysqli_fetch_assoc($result);
             if($data==20){
                 echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=amigos.php'> ";
                 echo "<script> alert('No puedes tener mas de 20 amigos'); </script> ";
             }
             else{
+
                 if (mysqli_query($con, "DELETE FROM `solicitud` WHERE `Id` = ".$_POST["id"]."")){ 
-                    $insertar = mysqli_query($con, "INSERT INTO `amigos`(`Id`, `Usuario`, `Amigo`) VALUES ('','".  $_POST["usuario"]  ."','".  $_POST["amigo"]  ."')");
-                    $insertar = mysqli_query($con, "INSERT INTO `amigos`(`Id`, `Usuario`, `Amigo`) VALUES ('','".  $_POST["amigo"]  ."','".  $_POST["usuario"]  ."')");
-                    echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=amigos.php'> ";
-                    echo "<script> alert('Se mando la solicitud'); </script> ";
+                    $verificar = "SELECT * FROM amigos WHERE Usuario = '".$_POST["amigo"]."' AND Amigo='".$_POST["usuario"]."'";
+                    if(mysqli_query($con, $verificar)){
+                        echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=amigos.php'> ";
+                        echo "<script> alert('Ya tienes agregado a esta persona'); </script> ";
+                    }
+                    else{
+                        $insertar = mysqli_query($con, "INSERT INTO `amigos`(`Id`, `Usuario`, `Amigo`) VALUES ('','".  $_POST["usuario"]  ."','".  $_POST["amigo"]  ."')");
+                        $insertar = mysqli_query($con, "INSERT INTO `amigos`(`Id`, `Usuario`, `Amigo`) VALUES ('','".  $_POST["amigo"]  ."','".  $_POST["usuario"]  ."')");
+                        echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=amigos.php'> ";
+                        echo "<script> alert('Se mando la solicitud'); </script> ";
+                    }
+                    
                 } 
                 else { 
                     echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=amigos.php'> ";
@@ -154,6 +164,7 @@
                 
                 if(mail($para, $titulo, $mensaje, $cabeceras)){
                     echo "<script>alert('Se envio el codigo');</script>";
+                    echo " <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=Login.php'> ";
                 }
                 else{
 
@@ -227,6 +238,12 @@
             else { 
                 echo "¡ No se ha encontrado ningún registro !"; 
             } 
+        }
+
+        function conectar(){
+            $con = mysql_connect("localhost", "root", ""); 
+            $base = mysql_select_db("kartenspiel", $con);    
+            session_start();
         }
 
     }

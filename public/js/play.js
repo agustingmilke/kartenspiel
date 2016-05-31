@@ -43,7 +43,6 @@ function CheckCell(x,z){
 					i=13;
 					board[x]=null;
 					M.innerHTML="";
-					//M.style.visibility="hidden";
 				}
 				if(q==2){
 						q=4;
@@ -64,7 +63,6 @@ function CheckCell(x,z){
 						else{
 							N = document.getElementById("M"+s);
 							N.innerHTML="";
-							//N.style.visibility="hidden";
 						}			
 				}
 				else if(q==0){
@@ -82,11 +80,10 @@ function CheckCell(x,z){
 					y=Math.round(Math.random()*12);
 					SelectCell(s,y);
 					t++;
-					if(t==11){
+					if(t==1){
 						board[s]=13;
 						i=13;
 						N.innerHTML="";
-						//N.style.visibility="hidden";
 						addWinner(Sala,player)
 					}
 				}
@@ -110,7 +107,6 @@ function CheckCell(x,z){
 					i=13;
 					board[x]=null;
 					M.innerHTML="";
-					//M.style.visibility="hidden";
 				}
 				if(q==2){
 					q=4;
@@ -131,7 +127,6 @@ function CheckCell(x,z){
 						else{
 							N = document.getElementById("M"+s);
 							N.innerHTML="";
-							//N.style.visibility="hidden";
 						}						
 				}
 				else if(q==0){
@@ -149,11 +144,10 @@ function CheckCell(x,z){
 					y=Math.round(Math.random()*12);
 					SelectCell(s,y);
 					t++;
-					if(t==11){
+					if(t==1){
 						board[s]=13;
 						i=13;
 						N.innerHTML="";
-						//N.style.visibility="hidden";
 						addWinner(Sala,player)
 					}
 				}
@@ -170,7 +164,7 @@ function CheckCell(x,z){
 				board[s]=13;
 				i=13;
 				N.innerHTML="";
-				//N.style.visibility="hidden";
+				N.style.visibility="hidden";
 				turno=false;
 				w=1;
 			}
@@ -264,6 +258,7 @@ function MostrarJuego(){
 	document.getElementById("content").style.display="block";
 	document.getElementById("Usuarios").style.display="none";
 	document.getElementById("content").style = "background-image: url(images/Fondo_"+SF+".jpg); height: 650px;";
+	socket.emit('consultaAmigos',player);
 	play()
 }
 function MostrarCrear(){
@@ -273,7 +268,7 @@ function MostrarCrear(){
 	document.getElementById("crearSalas").style.display="block";
 	document.getElementById("Salas").style.display="none";
 	document.getElementById("Usuarios").style.display="none";
-	alert(rooms);
+	//alert(rooms);
 }
 function MostrarSalas(){
 	document.getElementById("modo").style.display="none";
@@ -327,11 +322,17 @@ function MostrarUsuarios(){
 	document.getElementById("content").style.display="none";
 	document.getElementById("Usuarios").style.display="block";
 }
+function MostrarAmigos(){
+	document.getElementById("Amigos").style.display="block";
+	socket.emit('consultaAmigos',player);
+}
+
 document.getElementById("Seleccion").style.display="none";
 document.getElementById("Salas").style.display="none";
 document.getElementById("crearSalas").style.display="none";
 document.getElementById("content").style.display="none";
 document.getElementById("Usuarios").style.display="none";
+document.getElementById("Amigos").style.display="none";
 SC=1;
 SF=1;
 /*play();*/

@@ -21,7 +21,8 @@
         }
         else
         {
-            echo "no pudo iniciar sesion";
+            echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=Login.php'> ";
+            echo "<script>alert('No se pudo iniciar sesion');</script>"
         }
     }
 

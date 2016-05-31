@@ -1,23 +1,5 @@
 <!DOCTYPE html>
 
-<?php
-
-        include ("metodos.php");
-
-        $con=new metodos();
-
-        if(isset($_SESSION['usuario']))
-        {
-            echo "Si hay una session";
-        }
-        else
-        {
-            echo "no hay";
-        }
-
-    ?>
-
-
 <HTML>
 
 

@@ -18,7 +18,7 @@
     {
       if (bPreguntar){
         Abandono()
-        //return "¿Seguro que quieres salir?";
+        return "¿Seguro que quieres salir?";
       }
         
     }
@@ -27,102 +27,112 @@
      
 </head>
 <body align="center" style="background-image: url(images/Fondo_5.jpg)">
-	<div id="status"></div>
+  <div id="status"></div>
 
   <div id="modo">
   <SECTION class="login">
     <input class="bMenu" type="submit" value="Iniciar Partida" onclick = "MostrarSalas()"><br>
     <input class="bMenu" type="submit" value="Crear Sala" onclick = "MostrarCrear()"><br>
-    </SECTION>
+    
   </div>
   <div id="Salas">
   <div class="volver" onclick="MostrarModo()"><img src="images/volver.png"width="60" height="60"></div>
-  <SECTION class="login">
-  <h1>Salas disponibles</h1>
-    <div id="listaSalas">
-   
-    </div>
-  </SECTION>
+    <SECTION class="login">
+      <h1>Salas disponibles</h1>
+        <div id="listaSalas">
+        </div>
+        <center><img class='logros' src='images/linea.png' width='300px' height='20px'></center>
+      <h1>Invitaciones a Salas</h1>
+        
+        <div id="listaInvitaciones">
+        </div>
+    </SECTION>
   </div>
   <div id="crearSalas">
-  <div class="volver" onclick="MostrarModo()"><img src="images/volver.png"width="60" height="60"></div>
-  <SECTION class="login">
-      <center><h1>Crear Sala</h1></center>
-      <center><img class='logros' src='images/linea.png' width='300px' height='20px'></center>
-      <br><br><br>
-        <center><input class="sala" id="room" type="text" placeholder="Nombre de la Sala">
-        <br><br><br><br>
-        <input class="btnCircular" type="submit" value="Amigos" onclick="Crear(0)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input class="btnCircular" type="submit" value="Todos" onclick="Crear(1)">
-        </center>
+    <div class="volver" onclick="MostrarModo()"><img src="images/volver.png"width="60" height="60"></div>
+    <SECTION class="login">
+        <center><h1>Crear Sala</h1></center>
+        <center><img class='logros' src='images/linea.png' width='300px' height='20px'></center>
+        <br><br><br>
+          <center><input class="sala" id="room" type="text" placeholder="Nombre de la Sala">
+          <br><br><br><br>
+          <input class="btnCircular" type="submit" value="Amigos" onclick="Crear(0)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <input class="btnCircular" type="submit" value="Todos" onclick="Crear(1)">
+          </center>
+      </SECTION>
     </SECTION>
-  
+      <div id="SalasActivas">
+      
+    </div>
   </div>
   <div id="Usuarios">
+  <div class="volver" onclick="cancelar()"><img src="images/volver.png"width="60" height="60"></div>
     <SECTION class="login">
     <div id="name_room"></div>
     <div id="listaUsuarios">
-      
     </div>
     <div id="empezar"></div>
-  </SECTION>
+    <div id="Amigos">
+      <center><img class='logros' src='images/linea.png' width='300px' height='20px'></center>
+      <div id="listaAmigos"></div>
+    </div>
+   </SECTION>
   </div>
   <div id="Seleccion">
-  <div class="volverS" onclick="MostrarSalas()"><img src="images/volver.png"width="60" height="60"></div>
-  <center>
- <table>
-    <tr>
-      <td id="S1" onclick="Selection(1)"><img src="images/Carta_1_1.jpg" width="120" height="180"></td>
-      <td></td>
-      <td><div id='S4' onclick='Selection(4)' style='background-image: url(images/Fondo_1.jpg); height: 180px; width: 280px'></div></td>
-      <td></td>
-      <td rowspan= 2 id="MuestraF" style="background-image: url(images/Fondo_1.jpg); height: 300px; width: 220px;"><div id="MuestraC" align="center"><img src="images/Carta_1_1.jpg" width="120" height="180"></div></td>
-    </tr>
-    <tr>
-      <td id="S2">
-      </td> 
-      <td id="Mas"><img src="images/mas.png"width="180" height="180"></td>
-      <td id="S5">
-      </td>
-      <td id="Igual"><img src="images/igual.png"width="180" height="180"></td>
-    </tr>
-    <tr>
-      <td id="S3">
-      </td>
-      <td></td>
-      <td id="S6">
-      </td>
-      <td></td>
-      <td id="Aceptar" onclick="MostrarJuego()"><img src="images/aceptar.png"width="180" height="180"></td>
-    </tr>
-  </table>
-</center>
-
+    <div class="volverS" onclick="MostrarSalas()"><img src="images/volver.png"width="60" height="60"></div>
+    <center>
+     <table>
+        <tr>
+          <td id="S1" onclick="Selection(1)"><img src="images/Carta_1_1.jpg" width="120" height="180"></td>
+          <td></td>
+          <td><div id='S4' onclick='Selection(4)' style='background-image: url(images/Fondo_1.jpg); height: 180px; width: 280px'></div></td>
+          <td></td>
+          <td rowspan= 2 id="MuestraF" style="background-image: url(images/Fondo_1.jpg); height: 300px; width: 220px;"><div id="MuestraC" align="center"><img src="images/Carta_1_1.jpg" width="120" height="180"></div></td>
+        </tr>
+        <tr>
+          <td id="S2">
+          </td> 
+          <td id="Mas"><img src="images/mas.png"width="180" height="180"></td>
+          <td id="S5">
+          </td>
+          <td id="Igual"><img src="images/igual.png"width="180" height="180"></td>
+        </tr>
+        <tr>
+          <td id="S3">
+          </td>
+          <td></td>
+          <td id="S6">
+          </td>
+          <td></td>
+          <td id="Aceptar" onclick="MostrarJuego()"><img src="images/aceptar.png"width="180" height="180"></td>
+        </tr>
+      </table>
+    </center>
   </div>
   <div id ="content" align="center" >
-  	<div id="board" >
+    <div id="board" >
       <table id="scores">
-	      <td>
-	      	<div id="Titulo">KartenSpiel</div>
-	      </td>
+        <td>
+          <div id="Titulo">KartenSpiel</div>
+        </td>
         <td>
         Sala: 
         </td>
         <td>
           <div id="Sala"></div>
         </td>
-	      <td>
-	      Jugador: 
-	      </td>
-	      <td>
-	      	<div id="jugador"></div>
-	      </td>
-	      <td>
-	      Turno: 
-	      </td>
-	      <td>
-	      	<div id="Turno"></div>
-	      </td>     
+        <td>
+        Jugador: 
+        </td>
+        <td>
+          <div id="jugador"></div>
+        </td>
+        <td>
+        Turno: 
+        </td>
+        <td>
+          <div id="Turno"></div>
+        </td>     
       </table>
       <center>
       <table id="player">
@@ -167,12 +177,12 @@
           <div id="messages"style="width:250px; height:450px; overflow: auto; overflow-x : hidden;" >
   
           </div>
-				  <form onsubmit="return addMessage(this)">
-				    <input type="text" id="texto" placeholder="Cuéntanos algo...">
-				    <input type="submit" value="+">
-				  </form>
-			 </div>
-		</div>
+          <form onsubmit="return addMessage(this)">
+            <input type="text" id="texto" placeholder="Cuéntanos algo...">
+            <input type="submit" value="+">
+          </form>
+       </div>
+    </div>
     <div id="ganador"align="center">
 
     </div>

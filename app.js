@@ -6,9 +6,10 @@ var io = require('socket.io').listen(server);
 var mysql   = require('mysql');
 var rooms = [];
 var users = [];
+var invitaciones = [];
 var name;
 var res;
-var g;
+var p;
 var connection = mysql.createConnection({
      host: 'localhost',
      user: 'root',
@@ -27,42 +28,8 @@ app.use(express.static(path.join(__dirname, 'public')));
     app.get('/',function(req,res){
       console.log(req.query);
       name=req.query.name;
-      res.sendfile(__dirname+'/juego.html') ;
-      /*var user = {
-        player: name,
-        Sala: '',
-        status: ''
-      }
-      bandera = 0;
-      for(var x=0;x<users.length;x++){
-        if(users[x].player==name){
-          console.log("El jugador "+name+" ya esta jugando");
-          bandera = 1;
-          users.push(user);
-        }
-      }
-      if(bandera==0){
-        
-        console.log(name);/*
-        /*var datos = connection.query("SELECT Amigo from amigos where Usuario='"+name+"'");
-        console.log(datos);*/
-        //friends=req.query.friends;
-        //ganadas=req.query.ganadas;  
-        /*connection.query("SELECT Amigo from amigos where Usuario='"+name+"'", function(err,rows,fields){
-          if(!err)
-            console.log(rows);
-          else
-            console.log('error en la consulta');
-        });*/
-      /* res.sendfile(__dirname+'/juego.html') ; 
-      }
-      else{
-        res.sendfile(__dirname+'/denegado.html') ;
-      }*/
-      
-       
+      res.sendfile(__dirname+'/juego.html') ;  
     });
-
 app.use(express.static('public'));
 app.get('/hello', function(req, res) {  
   res.status(200).send("Hello World!");
@@ -70,12 +37,10 @@ app.get('/hello', function(req, res) {
 io.on('connection', function(socket) {  
   socket.emit('inicio',name);
     socket.emit('rooms',rooms);
+    io.sockets.emit('invitacion',invitaciones);
   //console.log('Alguien se ha conectado con Sockets');
   socket.on('disconnect',function(){
    console.log("alguien se desconectooooo :C");
-   /*if( socket.interval ){
-            clearInterval( socket.interval );
-        }*/
   }); 
   socket.on('new-ganadas', function(data) {
     //var ar = new Result([]);
@@ -101,7 +66,7 @@ io.on('connection', function(socket) {
     for(var x=0;x<rooms.length;x++){
       if(rooms[x].name==data){
         rooms[x].player++;
-        if(rooms[x].player>=2){
+        if(rooms[x].player>=2&&rooms[x].status==0){
           rooms[x].status=1;
         }
         if(rooms[x].player==4){
@@ -117,14 +82,19 @@ io.on('connection', function(socket) {
   socket.on('new-Winner',function(data){
     connection.query("SELECT partidas_g from usuarios where Usuario='"+data.player+"'", function(err,result,fields){
       if(err)throw err;
-      console.log(result[0].partidas_g);
-      g=result[0].partidas_g;
-      console.log(g);
-      g++;
-      console.log(g);
-      connection.query("UPDATE usuarios SET partidas_g="+g+" WHERE Usuario='"+data.player+"'");
+      else{
+        p=result[0].partidas_g;
+        p++;
+        connection.query("UPDATE usuarios SET partidas_g="+p+" WHERE Usuario='"+data.player+"'");
+      }
     });
-      
+    for(x=0;x<users.length;x++){
+        if(users[x].Sala==data.Sala&&users[x].player!=data.player){
+          user=users[x].player;
+          perdidas(user)
+        }
+      }
+    
     io.sockets.emit('Winner',data);
   });
   socket.on('new-Desc',function(data){
@@ -166,6 +136,7 @@ io.on('connection', function(socket) {
       }
     }*/
     users.push(data);
+
     io.sockets.emit('sigUser',users);
   });
   socket.on('new-Username',function(data){
@@ -205,14 +176,62 @@ io.on('connection', function(socket) {
     io.sockets.emit('delUser',data);
     for(var x=0;x<users.length;x++){
       if(users[x].Sala==data.Sala){
-        if(users[x].player==data.player)
+        if(users[x].player==data.player){
+          if(users[x].status==1){
+            perdidas(users[x].player)
+          }
           users.splice(x,1);
+          for(y=0;y<rooms.length;y++){
+            if(data.Sala==rooms[y].name){
+              rooms[y].player=rooms[y].player-1;
+              if(rooms[y].player==3){
+                rooms[y].status=1;
+              }
+              io.sockets.emit('rooms',rooms);
+            }
+          }
+        }
       }
     }
-  });  
+    io.sockets.emit('sigUser',users);
+  }); 
+  socket.on('consultaAmigos',function(data){
+    connection.query("SELECT Amigo from amigos where Usuario ='"+data+"'", function(err,rows,fields){
+      if(!err){
+        console.log(rows);
+        rows.unshift(data);
+        io.sockets.emit('Amigos',rows);
+      }
+        
+      else
+        console.log('error en la base de datos');
+    });
+  });
+  socket.on('new-invitacion',function(data){
+      invitaciones.push(data);
+      io.sockets.emit('invitacion',invitaciones);
+      io.sockets.emit('rooms',rooms);
+  }); 
+  socket.on('new-solicitud',function(data){
+      connection.query("INSERT INTO `solicitud`(`Id`, `Solicitante`, `Solicitado`) VALUES (NULL,'"+data.player+"','"+data.amigo+"')");
+  });
 });
 
 server.listen(8080, function() {  
   console.log("Servidor corriendo en http://localhost:8080");
 });
 
+function perdidas(user){
+  connection.query("SELECT partidas_p from usuarios where Usuario='"+user+"'",function(err,result,fields){
+            if(err)throw err;
+            else{
+              //console.log(result[0].partidas_p);
+
+              p=result[0].partidas_p;
+              p++;
+              //console.log(p);
+              console.log(user);
+              connection.query("UPDATE usuarios SET partidas_p="+p+" WHERE Usuario='"+user+"'");
+            }
+          });
+}
