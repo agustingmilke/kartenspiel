@@ -80,7 +80,7 @@ function CheckCell(x,z){
 					y=Math.round(Math.random()*12);
 					SelectCell(s,y);
 					t++;
-					if(t==1){
+					if(t==6){
 						board[s]=13;
 						i=13;
 						N.innerHTML="";
@@ -144,7 +144,7 @@ function CheckCell(x,z){
 					y=Math.round(Math.random()*12);
 					SelectCell(s,y);
 					t++;
-					if(t==1){
+					if(t==6){
 						board[s]=13;
 						i=13;
 						N.innerHTML="";
