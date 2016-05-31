@@ -22,7 +22,7 @@
         else
         {
             echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=Login.php'> ";
-            echo "<script>alert('No se pudo iniciar sesion');</script>"
+            echo "<script>alert('No se pudo iniciar sesion');</script>";
         }
     }
 
