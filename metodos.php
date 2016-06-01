@@ -227,6 +227,20 @@
             } 
         }
 
+        function correo(){
+            $con = mysqli_connect("localhost", "root", "kartenspiel", "kartenspiel");
+            $consulta = mysqli_query($con, "select correo from usuarios where Usuario='".  $_SESSION['usuario']  ."'");
+            if ($row = mysqli_fetch_array($consulta, MYSQLI_ASSOC)){ 
+               do { 
+                    echo "".$row["correo"].""; 
+                    return "".$row["correo"]."";
+                } while ($row = mysqli_fetch_array($consulta, MYSQLI_ASSOC)); 
+            } 
+            else { 
+                echo "¡ No se ha encontrado ningún registro !"; 
+            } 
+        }
+
         function partidas(){
             $con = mysqli_connect("localhost", "root", "kartenspiel", "kartenspiel");  
             $consulta = mysqli_query($con, "select partidas_t from usuarios where Usuario='".  $_SESSION['usuario']  ."'");
