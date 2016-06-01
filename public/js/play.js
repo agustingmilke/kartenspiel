@@ -164,7 +164,6 @@ function CheckCell(x,z){
 				board[s]=13;
 				i=13;
 				N.innerHTML="";
-				N.style.visibility="hidden";
 				turno=false;
 				w=1;
 			}
