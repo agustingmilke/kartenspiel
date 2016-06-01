@@ -72,6 +72,9 @@ io.on('connection', function(socket) {
         if(rooms[x].player==4){
           rooms[x].status=2;
         }
+        if(rooms[x].player>=2&&rooms[x].status==4){
+          rooms[x].status=5;
+        }
       }
     }
     io.sockets.emit('rooms',rooms);

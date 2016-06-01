@@ -245,15 +245,16 @@ socket.on('rooms',function(data){
     document.getElementById("SalasActivas").innerHTML = "" ;
     document.getElementById("listaSalas").innerHTML = "" ;
     document.getElementById("empezar").innerHTML = "" ;
+    document.getElementById('listaInvitaciones').innerHTML = "";
   for(x=0;x<data.length;x++){
     document.getElementById("SalasActivas").innerHTML += `<div>${data[x].name}</div>`;
-    if(data[x].status!=2&&data[x].status!=3&&data[x].status!=4){ //sala llena o juego en curso o solo amigos
+    if(data[x].status!=2&&data[x].status!=3&&data[x].status!=4&&data[x].status!=5){ //sala llena o juego en curso o solo amigos
       document.getElementById('listaSalas').innerHTML +=`<div><strong>${data[x].name},${data[x].player}</strong><img src="images/aceptar.png" onclick="unirse('${data[x].name}',${data[x].player})" width="50" height="50"></div>`;
     }    
-    if(data[x].admin==idplayer&&(data[x].status==1||data[x].status==2)&&data[x].name==Sala){
+    if(data[x].admin==idplayer&&(data[x].status==1||data[x].status==5)&&data[x].name==Sala){
       document.getElementById("empezar").innerHTML = '<img src="images/aceptar.png" onclick="iniciar(Sala)"width="90" height="90">';
     }
-    if(data[x].status==4){
+    if(data[x].status==4||data[x].status==5){
       for(y=0;y<invitacion.length;y++){
         if(invitacion[y]==data[x].name){
           document.getElementById('listaInvitaciones').innerHTML +=`<div><strong>${data[x].name},${data[x].player}</strong><img src="images/aceptar.png" onclick="unirse('${data[x].name}',${data[x].player})" width="50" height="50"></div>`;
@@ -365,6 +366,7 @@ socket.on('Amigos',function(data){
   }
 })
 socket.on('invitacion',function(data){
+  invitacion.splice(0,invitacion.length);
   for(x=0;x<data.length;x++){
     if(data[x].amigo==player){
       invitacion.push(data[x].Sala);

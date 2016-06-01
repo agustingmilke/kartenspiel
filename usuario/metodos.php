@@ -80,11 +80,12 @@
         
         if($_POST["action"]=="solicitar"){
             $consulta = mysqli_query($con, "select Usuario from usuarios where Usuario='".  $_POST["amigo"]  ."' ");
-            $result=mysql_query("SELECT count(*) as total from AMIGOS WHERE Usuario = ".$_SESSION."");
-            $data=mysql_fetch_assoc($result);
+            $result=mysqli_query($con, "SELECT count(*) as total from AMIGOS WHERE Usuario = '".$_SESSION["usuario"]."'");
+            $data=mysqli_fetch_assoc($result);
 
             $max = mysqli_query($con, "select * from amigos where Usuario='".  $_POST["amigo"]  ."' ");
-            if($data==20){
+
+            if($data["total"]==20){
                 echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=amigos.php'> ";
                 echo "<script> alert('No puedes tener mas de 20 amigos'); </script> ";
             }
@@ -106,23 +107,26 @@
         if($_POST["action"]=='aceptar'){
             $result=mysqli_query($con, "SELECT count(*) as total from amigos WHERE Usuario = '".$_SESSION["usuario"]."'");
             $data=mysqli_fetch_assoc($result);
-            if($data==20){
+            if($data["total"]==20){
                 echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=amigos.php'> ";
                 echo "<script> alert('No puedes tener mas de 20 amigos'); </script> ";
             }
             else{
 
                 if (mysqli_query($con, "DELETE FROM `solicitud` WHERE `Id` = ".$_POST["id"]."")){ 
-                    $verificar = "SELECT * FROM amigos WHERE Usuario = '".$_POST["amigo"]."' AND Amigo='".$_POST["usuario"]."'";
-                    if(mysqli_query($con, $verificar)){
+                    $ver_sentencia = "SELECT count(*) as total FROM amigos WHERE Usuario = '".$_POST["amigo"]."' AND Amigo='".$_POST["usuario"]."'";
+                    $verificar = mysqli_query($con, $ver_sentencia);
+                    $filas = mysqli_fetch_assoc($verificar);
+
+                    if($filas["total"] !=0){
                         echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=amigos.php'> ";
                         echo "<script> alert('Ya tienes agregado a esta persona'); </script> ";
                     }
                     else{
-                        $insertar = mysqli_query($con, "INSERT INTO `amigos`(`Id`, `Usuario`, `Amigo`) VALUES ('','".  $_POST["usuario"]  ."','".  $_POST["amigo"]  ."')");
-                        $insertar = mysqli_query($con, "INSERT INTO `amigos`(`Id`, `Usuario`, `Amigo`) VALUES ('','".  $_POST["amigo"]  ."','".  $_POST["usuario"]  ."')");
+                        $insertar = mysqli_query($con, "INSERT INTO `amigos`(`Id`, `Usuario`, `Amigo`) VALUES (NULL,'".  $_POST["usuario"]  ."','".  $_POST["amigo"]  ."')");
+                        $insertar = mysqli_query($con, "INSERT INTO `amigos`(`Id`, `Usuario`, `Amigo`) VALUES (NULL,'".  $_POST["amigo"]  ."','".  $_POST["usuario"]  ."')");
                         echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=amigos.php'> ";
-                        echo "<script> alert('Se mando la solicitud'); </script> ";
+                        echo "<script> alert('Se ha aceptado al usuario'); </script> ";
                     }
                     
                 } 
