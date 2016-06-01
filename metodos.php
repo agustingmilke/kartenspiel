@@ -68,7 +68,7 @@
 
 
                     //aqui termina lo de la fecha
-                    echo "<META HTTP-EQUIV='REFRESH' CONTENT='0;URL=usuario/menu.html'> ";
+                    echo "<META HTTP-EQUIV='REFRESH' CONTENT='0;URL=usuario/menu.php'> ";
                 }
                 else{
                     echo "<script>alert('El codigo no es correcto');</script>";
