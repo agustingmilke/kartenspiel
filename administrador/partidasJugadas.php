@@ -45,13 +45,9 @@
 	$theme_class=new UniversalTheme;
 
 	$graph->SetTheme($theme_class);
-	$graph->img->SetAntiAliasing(false);
 	$graph->title->Set('Partidas de KartenSpiel');
 	$graph->yaxis->title->Set("Juegos Realizados");
 	$graph->SetBox(false);
-
-	$graph->img->SetAntiAliasing();
-
 
 	$graph->yaxis->HideZeroLabel();
 	$graph->yaxis->HideLine(false);
