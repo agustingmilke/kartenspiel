@@ -42,17 +42,8 @@
 	$graph = new Graph(900,350,"auto");
 	$graph->SetScale("textlin");
 
-	$theme_class=new UniversalTheme;
-
-	$graph->SetTheme($theme_class);
 	$graph->title->Set('Registro de Usuarios en KartenSpiel');
-	$graph->SetBox(false);
 
-	$graph->yaxis->HideZeroLabel();
-	$graph->yaxis->HideLine(false);
-	$graph->yaxis->HideTicks(false,false);
-
-	$graph->xgrid->Show();
 	$graph->xgrid->SetLineStyle("solid");
 	$graph->xaxis->SetTickLabels(array('Ene','Feb','Mar','Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Nov', 'Oct', 'Dic'));
 	$graph->xgrid->SetColor('#E3E3E3');
