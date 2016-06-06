@@ -107,7 +107,7 @@ class Image {
             imageantialias($this->img,$aFlg);
         }
         else {
-            //JpGraphError::RaiseL(25128);//('The function imageantialias() is not available in your PHP installation. Use the GD version that comes with PHP and not the standalone version.')
+            JpGraphError::RaiseL(25128);//('The function imageantialias() is not available in your PHP installation. Use the GD version that comes with PHP and not the standalone version.')
         }
     }
 
@@ -2140,7 +2140,7 @@ class ImgStreamCache {
                 // exist we need to delete the old file first
                 if( !@unlink($aStrokeFileName) ) {
                     $lock = flock($fd, LOCK_UN);
-                    //JpGraphError::RaiseL(25111,$aStrokeFileName);
+                    JpGraphError::RaiseL(25111,$aStrokeFileName);
                     //(" Can't delete cached image $aStrokeFileName. Permission problem?");
                 }
                 $aImage->Stream($aStrokeFileName);
