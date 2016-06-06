@@ -45,11 +45,8 @@
 	$theme_class=new UniversalTheme;
 
 	$graph->SetTheme($theme_class);
-	$graph->img->SetAntiAliasing(false);
 	$graph->title->Set('Registro de Usuarios en KartenSpiel');
 	$graph->SetBox(false);
-
-	$graph->img->SetAntiAliasing();
 
 	$graph->yaxis->HideZeroLabel();
 	$graph->yaxis->HideLine(false);
@@ -69,8 +66,6 @@
 		$p1->SetLegend('Año:'.$año[$i].'');
 		$graph->Add($p1);	
 	}
-
-	$graph->legend->SetFrameWeight(1);
 
 	// Output line
 	//$graph->Stroke();
