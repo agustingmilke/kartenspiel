@@ -39,11 +39,11 @@ if (isset($_POST["clave"]) && isset($_POST["usuario"]) && isset($_POST["correo"]
             
         }
         else{
-            echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=Registro.html'> ";
+            echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=registro.php'> ";
             echo "<script>alert('Ya existe alguien con este correo o nombre de usuario');</script>";
         }
             
-	}
+    }
     else{
         echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=registro.php'> ";
     }
@@ -72,24 +72,26 @@ if (isset($_POST["clave"]) && isset($_POST["usuario"]) && isset($_POST["correo"]
         </NAV>
 
         <SECTION class="registro">
-        	<h1 align="center">Confirmacion</h1>
+            <h1 align="center">Confirmacion</h1>
             <hr size=1 width=50% align="center">
             <br>
             <form action = "metodos.php" method="post">
             <center> 
                 <?php
                 echo "<form action='metodos.php' method='post'>";
-                	echo "<input type='hidden' name='action' value='registrar'> ";
-					echo "<input type='hidden' name='clave' value='".$_POST["clave"]."'> ";
-					echo "<input type='hidden' name='usuario' value='".$_POST["usuario"]."'> ";
-					echo "<input type='hidden' name='correo' value='".$_POST["correo"]."'> ";
-					echo "<input type='hidden' name='edad' value='".$_POST["edad"]."'> ";
-					echo "<input type='hidden' name='nombre' value='".$_POST["nombre"]."'> ";
-					echo '<input name = "codigo" type="text" placeholder="Codigo">';
-					echo "<input type='submit' value='Confirmar'>";
+                    echo "<input type='hidden' name='action' value='registrar'> ";
+                    echo "<input type='hidden' name='clave' value='".$_POST["clave"]."'> ";
+                    echo "<input type='hidden' name='usuario' value='".$_POST["usuario"]."'> ";
+                    echo "<input type='hidden' name='correo' value='".$_POST["correo"]."'> ";
+                    echo "<input type='hidden' name='edad' value='".$_POST["edad"]."'> ";
+                    echo "<input type='hidden' name='nombre' value='".$_POST["nombre"]."'> ";
+                    echo '<input name = "codigo" type="text" placeholder="Codigo">';
+                    echo "<input type='submit' value='Confirmar'>";
                 echo "</form>";
-				?>
+                ?>
             </form>
+            <br><br>
+            <h2 style="font-family: Charcoal, sans-serif;">El correo enviado puede llegar a los correos no deseados o como SPAM</h2>
             </center>
             <br>
         </SECTION>
