@@ -27,16 +27,26 @@
             <center> 
                 <table width="50%">
                     <tr>
-                        <td width="10%"><h2>Usuario:</h2></td> 
-                        <td ><input name = "usuario" class="registro" type="text" placeholder="Usuario" align="center" id="usuario"></td>
+                        <td width="10%"><h2>Usuario*:</h2></td> 
+                        <td ><input onfocus="document.getElementById('mensajeU').style.display = 'block';" 
+                            onblur="document.getElementById('mensajeU').style.display = 'none';"
+                            name = "usuario" class="registro" type="text" placeholder="Usuario" align="center" id="usuario" required>
+                            </td>
+                        <td valign=top><div id='mensajeU' style='display:none;position:absolute;font-size:20px;'>Minimo 1 letra y 1 numero <br> De 8 a 15 caracteres </div></td>
                     </tr>
                     <tr>
-                         <td width="10%"><h2>Contrase&ntildea:</h2></td>  
-                         <td ><input name = "clave" class="registro" type="password" placeholder="Clave" align="center" id="clave"></td>
-                    </tr>
+                         <td width="10%"><h2>Contrase&ntildea*:</h2></td>  
+                         <td ><input onfocus="document.getElementById('mensajeCon').style.display = 'block';" 
+                            onblur="document.getElementById('mensajeCon').style.display = 'none';"
+                            name = "clave" class="registro" type="password" placeholder="Clave" align="center" id="clave" required></td>
+                         <td valign=top><div id='mensajeCon' style='display:none;position:absolute;font-size:20px;'>Minimo 1 letra y 1 numero <br> De 8 a 15 caracteres </div></td>
+                     </tr>
                     <tr>
-                        <td width="10%"><h2>Correo:</h2></td>  
-                        <td ><input name = "correo" class="registro" type="text" placeholder="Correo" align="center" id="correo"></td>
+                        <td width="10%"><h2>Correo*:</h2></td>  
+                        <td ><input onfocus="document.getElementById('mensajeCor').style.display = 'block';" 
+                            onblur="document.getElementById('mensajeCor').style.display = 'none';"
+                            name = "correo" class="registro" type="text" placeholder="Correo" align="center" id="correo" required></td>
+                        <td valign=top><div id='mensajeCor' style='display:none;position:absolute;font-size:20px;'>Tiene que ser un correo valido </div></td>
                     </tr>
                     <tr>
                         <td width="10%"><h2>Nombre:</h2></td>   
