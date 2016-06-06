@@ -2140,7 +2140,7 @@ class ImgStreamCache {
                 // exist we need to delete the old file first
                 if( !@unlink($aStrokeFileName) ) {
                     $lock = flock($fd, LOCK_UN);
-                    JpGraphError::RaiseL(25111,$aStrokeFileName);
+                    //JpGraphError::RaiseL(25111,$aStrokeFileName);
                     //(" Can't delete cached image $aStrokeFileName. Permission problem?");
                 }
                 $aImage->Stream($aStrokeFileName);
