@@ -39,7 +39,7 @@
 
     $cant = count($año);
 
-	$graph = new Graph(900,350,"auto");
+	$graph = new Graph(900,350,);
 	$graph->SetScale("textlin");
 
 	$graph->title->Set('Registro de Usuarios en KartenSpiel');
