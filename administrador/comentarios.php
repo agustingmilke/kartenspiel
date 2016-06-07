@@ -52,7 +52,7 @@
 					if ($row = mysqli_fetch_array($consulta, MYSQLI_ASSOC)){ 
 			        	do {
 							echo "<br><h2 style='display:inline;'>".$row["usuario"]."</h2>";
-							echo "<textarea rows='10' cols='100'>".$row["comentario"]."</textarea>";
+							echo "<textarea class='comentarios' rows='10' cols='100'>".$row["comentario"]."</textarea>";
 							
 								echo "<form action='metodos.php' method='post'>";
 									echo "<br><br>";
