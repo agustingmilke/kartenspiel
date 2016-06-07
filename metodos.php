@@ -27,8 +27,8 @@
         } 
         
         if($_POST['action'] == 'registrar') {
-            $sql = "INSERT INTO `usuarios`(`Usuario`, `Contrasena`, `Nombre`, `Correo`, `Tipo`, `partidas_g`, `partidas_p`) 
-                VALUES ('".$_POST["usuario"]."','".$_POST["clave"]."','".$_POST["nombre"]."','".$_POST["correo"]."',1,0,0)";
+            $sql = "INSERT INTO `usuarios`(`Usuario`, `Contrasena`, `Nombre`, `Correo`, `Tipo`, `partidas_g`, `partidas_p`, `Status`) 
+                VALUES ('".$_POST["usuario"]."','".$_POST["clave"]."','".$_POST["nombre"]."','".$_POST["correo"]."',1,0,0,'A')";
             $sql2 ="SELECT codigo FROM codigo WHERE Usuario = '".$_POST["usuario"]."'";
             $consulta = mysqli_query($con, $sql2);
             if($row = mysqli_fetch_array($consulta, MYSQLI_ASSOC)){

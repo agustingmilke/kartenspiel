@@ -5,9 +5,16 @@
         $con = mysqli_connect("localhost", "root", "kartenspiel", "kartenspiel");
         
         if($_POST['action'] == 'eliminar') {
-            $consulta = mysqli_query($con, "DELETE FROM `usuarios` WHERE Usuario = '".$_POST["usuario"]."'");
+            $consulta = mysqli_query($con, "UPDATE `usuarios` SET `Status`='B' WHERE Usuario = '".$_POST["usuario"]."'");
+            $consulta = mysqli_query($con, "INSERT INTO `baneados`(`Id_ban`, `Usuario`, `Mensaje`) VALUES (NULL,'".$_POST["usuario"]."','".$_POST["mensaje"]."')");
             echo "<META HTTP-EQUIV='REFRESH' CONTENT='0;URL=usuarios.php'> ";
         } 
+
+        if($_POST['action'] == 'anti-ban'){
+            $consulta = mysqli_query($con, "UPDATE `usuarios` SET `Status`='A' WHERE Usuario = '".$_POST["usuario"]."'");
+            $consulta = mysqli_query($con, "DELETE FROM `baneados` WHERE Usuario= '".$_POST["usuario"]."'");
+            echo "<META HTTP-EQUIV='REFRESH' CONTENT='0;URL=baneados.php'> ";
+        }
 
         if($_POST['action'] == 'modificar'){
             $consulta = mysqli_query($con, "UPDATE `usuarios` SET `Usuario`='".$_POST["usuario"]."',`Nombre`='".$_POST["nombre"]."',`Correo`='".$_POST["correo"]."',`partidas_g`='".$_POST["pg"]."',`partidas_p`='".$_POST["pp"]."' WHERE usuario = '".$_POST["usuario_modificar"]."'");

@@ -11,7 +11,7 @@
         }
 
         $con = mysqli_connect("localhost", "root", "kartenspiel", "kartenspiel");  
-        $consulta = mysqli_query($con, "select * from usuarios ");
+        $consulta = mysqli_query($con, "select * from usuarios WHERE Status = 'A'");
     
 
     ?>
@@ -43,6 +43,7 @@
 					<li><a href="comentarios.php" > Comentarios</a></li>
 					<li><a href="usuariosRegistrados.php"> Registros</a></li>
 					<li><a href="partidasJugadas.php"> Partidas</a></li>
+					<li><a href="baneados.php"> Baneados</a></li>
 				</ul>
 			</div>
 			
