@@ -45,7 +45,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Te lo ragalamos</td>
+				<td>Te lo regalamos</td>
 				<td><center><img align= "center" class='logros' src='img/Fondo_1.jpg' width='90px' height='90px'></center></td>
 				<td><img class='logros' src='img/si.png' width='50px' height='50px'> </td>
 			</tr>
