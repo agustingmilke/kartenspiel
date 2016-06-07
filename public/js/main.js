@@ -12,6 +12,10 @@ socket.on('inicio',function(data){
   player = data;  
 
 })
+socket.on('volumen',function(data){
+  volumen = data;  
+  alert(volumen);
+})
 socket.on('ganadas',function(data){
   //alert(data);
   if(data.player==player){
