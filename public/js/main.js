@@ -1,6 +1,7 @@
 var socket = io.connect('http://kartenspielweb.info:8080', { 'forceNew': true });
 
 var rooms =[];
+var rooms_p =[];
 var Turnos=[5];
 var invitacion=[];
 var amigos=[];
@@ -251,8 +252,10 @@ socket.on('rooms',function(data){
     document.getElementById("empezar").innerHTML = "" ;
     document.getElementById('listaInvitaciones').innerHTML = "";
     rooms.splice(0,rooms.length);
+    rooms_p.splice(0,rooms.length);
   for(x=0;x<data.length;x++){
     rooms[x]=data[x].name;
+    rooms_p[x]=data[x].player;
     if(data[x].status==2)status_sala='Sala llena';
     if(data[x].status==4||data[x].status==5) status_sala='Sala de Amigos';
     if(data[x].status==0||data[x].status==1) status_sala='Sala Activa';
@@ -552,7 +555,7 @@ function iniciar(Sala){
 function unirse(name){
   for(x=0;x<rooms.length;x++){
     if(rooms[x].name==name){
-      IDP=rooms[x].player;
+      IDP=rooms_p[x].player;
     }
   }
   document.getElementById("Sala").innerHTML = name;
