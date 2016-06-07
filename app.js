@@ -42,7 +42,7 @@ app.get('/hello', function(req, res) {
   res.status(200).send("Hello World!");
 });
 io.on('connection', function(socket) {  
-  socket.emit('inicio',volumen);
+  socket.emit('inicio',name);
     socket.emit('rooms',rooms);
     io.sockets.emit('invitacion',invitaciones);
   //console.log('Alguien se ha conectado con Sockets');

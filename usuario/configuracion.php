@@ -39,7 +39,7 @@ session_start();
             </audio>
             <table>
                 <tr>
-                    <form action="metodos.php" method="post">
+                    <form action="metodos.php" method="post" onsubmit="volum()">
                         
                             <td><center><input type="range" min="0" max="1" value="<?php echo $_SESSION["volumen"]?>" step="0.1" id="volumen" name="volumen"></center></td>
                             <input type="hidden" value="sonido" name="action">
@@ -72,6 +72,9 @@ session_start();
     </BODY>
 
     <script>
+        function volum(){
+            sessionStorage.setItem("volumen", .1);
+        }
         var barra = document.getElementById("volumen");
         var myAudio = document.getElementById("myAudio");
         barra.addEventListener("change",function(ev){

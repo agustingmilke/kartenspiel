@@ -9,9 +9,8 @@ var volumen = volumen;
 for(x=0;x<5;x++)
   Turnos[x]=false;
 socket.on('inicio',function(data){
-  player = data.name;  
-  volumen = data.volumen;
-  alert ("jiji"+volumen);
+  player = data;  
+
 })
 socket.on('ganadas',function(data){
   //alert(data);
