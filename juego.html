@@ -23,7 +23,8 @@
         
     }
     var myAudio = document.getElementById("myAudio");
-    myAudio.volume = volumen;
+    var vol = sessionStorage.getItem("volumen")
+    myAudio.volume = vol;
     myAudio.play();
     alert(volumen);
     
