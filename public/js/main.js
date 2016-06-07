@@ -254,13 +254,13 @@ socket.on('rooms',function(data){
   for(x=0;x<data.length;x++){
     rooms[x]=data[x].name;
     if(data[x].status==2)status_sala='Sala llena';
-    if(data[x].status==4||data[x].status==5) status_sala='Sala de amigos';
+    if(data[x].status==4||data[x].status==5) status_sala='Sala de Amigos';
     if(data[x].status==0||data[x].status==1) status_sala='Sala Activa';
-    if(data[x].status==6||data[x].status==7) status_sala='Sala reiniciada';
-    if(data[x].status==3) status_sala='Sala en uso';
+    if(data[x].status==6||data[x].status==7) status_sala='Sala Reiniciada';
+    if(data[x].status==3) status_sala='Sala en Uso';
     document.getElementById("SalasActivas").innerHTML += `<div><strong>${data[x].name} :  ${status_sala}</strong></div>`;
     if(data[x].status!=2&&data[x].status!=3&&data[x].status!=4&&data[x].status!=5&&data[x].status!=6&&data[x].status!=7){ //sala llena o juego en curso o solo amigos
-      document.getElementById('listaSalas').innerHTML +=`<div><strong>${data[x].name},${data[x].player}</strong><img src="images/aceptar.png" onclick="unirse('${data[x].name}',${data[x].player})" width="50" height="50"></div>`;
+      document.getElementById('listaSalas').innerHTML +=`<div><strong>${data[x].name}, jugadores : ${data[x].player}</strong><img src="images/aceptar.png" onclick="unirse('${data[x].name}')" width="50" height="50"></div>`;
     }    
     if(data[x].admin==idplayer&&(data[x].status==1||data[x].status==5||data[x].status==7)&&data[x].name==Sala){
       document.getElementById("empezar").innerHTML = '<img src="images/aceptar.png" onclick="iniciar(Sala)"width="90" height="90">';
@@ -354,8 +354,8 @@ socket.on('Winner',function(data){
 })
 socket.on('reset',function(data){
   if(data==Sala){
-    document.getElementById("ganador").innerHTML += `<img src="images/volver.png" onclick="MostrarModo()" width="60" height="60">
-                                                    <img src ="images/aceptar.png" onclick="unirse(Sala,1)" width="70" height="70">`;
+    document.getElementById("ganador").innerHTML += `<img src="images/cerrar_sesion.png" onclick="MostrarModo()" width="90" height="90">
+                                                    <img src ="images/aceptar.png" onclick="unirse(Sala)" width="90" height="90">`;
 
   }
 })
@@ -549,7 +549,12 @@ function iniciar(Sala){
     };
   socket.emit('turn',Turn);
 }
-function unirse(name,IDP){
+function unirse(name){
+  for(x=0;x<rooms.length;x++){
+    if(rooms[x].name=name){
+      IDP=rooms[x].player;
+    }
+  }
   document.getElementById("Sala").innerHTML = name;
   socket.emit('new-player',name); //avisa que alguien se ha unido a la sala
 
