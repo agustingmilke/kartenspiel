@@ -78,6 +78,9 @@ io.on('connection', function(socket) {
         if(rooms[x].player>=2&&rooms[x].status==4){
           rooms[x].status=5;
         }
+        if(rooms[x].player>=2&&rooms[x].status==6){
+          rooms[x].status=7;
+        }
       }
     }
     io.sockets.emit('rooms',rooms);
@@ -150,19 +153,21 @@ io.on('connection', function(socket) {
   });
   socket.on('new-reset',function(data){
     for(var x=0;x<rooms.length;x++){
-      if(rooms[x].name==data.Sala){
-        rooms[x].status=1;
-        rooms[x].player=data.contador;
+      if(rooms[x].name==data){
+        rooms.splice(x,1);
       }
     }
     for(var x=0;x<users.length;x++){
-      if(users[x].Sala==data.Sala){
-        users[x].status=0;
+      if(users[x].Sala==data){
+        /*users[x].Sala=null;
+        users[x].status=0;*/
+        users.splice(x,1);
       }
     }
-    io.sockets.emit('rooms',rooms);
     io.sockets.emit('sigUser',users);
-    io.sockets.emit('reset',data.Sala);
+    io.sockets.emit('rooms',rooms);
+    io.sockets.emit('reset',data);
+    
   });
   socket.on('new-close',function(data){
     io.sockets.emit('close',data);
@@ -176,6 +181,7 @@ io.on('connection', function(socket) {
         rooms.splice(x,1);
       }
     }
+    io.sockets.emit('sigUser',users);
     io.sockets.emit('rooms',rooms);
   });
   socket.on('delete-User',function(data){
@@ -220,6 +226,9 @@ io.on('connection', function(socket) {
   }); 
   socket.on('new-solicitud',function(data){
       connection.query("INSERT INTO `solicitud`(`Id`, `Solicitante`, `Solicitado`) VALUES (NULL,'"+data.player+"','"+data.amigo+"')");
+  });
+  socket.on('new-baraja',function(data){
+    io.sockets.emit('baraja',data);
   });
 });
 

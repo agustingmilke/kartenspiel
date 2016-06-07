@@ -5,23 +5,13 @@ var Turnos=[5];
 var invitacion=[];
 var amigos=[];
 var idplayer = 0;
-var volumen = volumen;
 for(x=0;x<5;x++)
   Turnos[x]=false;
+
 socket.on('inicio',function(data){
   player = data;  
-
-})
-socket.on('volumen',function(data){
-  volumen = data;  
-  alert(volumen);
-    var myAudio = document.getElementById("myAudio");
-    myAudio.volume = volumen;
-    myAudio.play();
-    alert(volumen);
 })
 socket.on('ganadas',function(data){
-  //alert(data);
   if(data.player==player){
     if(data.res > 4){
     document.getElementById("S2").innerHTML = "<img onclick='Selection(2)' src='images/Carta_2_1.jpg' width='120px' height='180px'>";
@@ -51,7 +41,6 @@ socket.on('ganadas',function(data){
 })
 socket.on('Username',function(data){
   if(data.Sala==Sala){
-
     if(contador==2){
        if(idplayer!=data.idplayer){
          document.getElementById(`usuarioB`).innerHTML =  `${data.player}` ;
@@ -254,12 +243,14 @@ socket.on('rooms',function(data){
     document.getElementById("listaSalas").innerHTML = "" ;
     document.getElementById("empezar").innerHTML = "" ;
     document.getElementById('listaInvitaciones').innerHTML = "";
+    rooms.splice(0,rooms.length);
   for(x=0;x<data.length;x++){
+    rooms[x]=data[x].name;
     document.getElementById("SalasActivas").innerHTML += `<div>${data[x].name}</div>`;
-    if(data[x].status!=2&&data[x].status!=3&&data[x].status!=4&&data[x].status!=5){ //sala llena o juego en curso o solo amigos
+    if(data[x].status!=2&&data[x].status!=3&&data[x].status!=4&&data[x].status!=5&&data[x].status!=6&&data[x].status!=7){ //sala llena o juego en curso o solo amigos
       document.getElementById('listaSalas').innerHTML +=`<div><strong>${data[x].name},${data[x].player}</strong><img src="images/aceptar.png" onclick="unirse('${data[x].name}',${data[x].player})" width="50" height="50"></div>`;
     }    
-    if(data[x].admin==idplayer&&(data[x].status==1||data[x].status==5)&&data[x].name==Sala){
+    if(data[x].admin==idplayer&&(data[x].status==1||data[x].status==5||data[x].status==7)&&data[x].name==Sala){
       document.getElementById("empezar").innerHTML = '<img src="images/aceptar.png" onclick="iniciar(Sala)"width="90" height="90">';
     }
     if(data[x].status==4||data[x].status==5){
@@ -351,9 +342,9 @@ socket.on('Winner',function(data){
 })
 socket.on('reset',function(data){
   if(data==Sala){
-    document.getElementById("board").style.display="block";
-    document.getElementById("ganador").style.display="none";
-    MostrarUsuarios()
+    document.getElementById("ganador").innerHTML += `<img src="images/volver.png" onclick="MostrarModo()" width="60" height="60">
+                                                    <img src ="images/aceptar.png" onclick="unirse(Sala,1)" width="70" height="70">`;
+
   }
 })
 socket.on('close',function(data){
@@ -381,6 +372,22 @@ socket.on('invitacion',function(data){
     }
   }
  // alert(invitacion);
+})
+socket.on('baraja',function(data){
+  if(data.Sala==Sala){
+    cartas[1] = data.C1;
+    cartas[2] = data.C2;
+    cartas[3] = data.C3;
+    cartas[4] = data.C4;
+    cartas[5] = data.C5;
+    cartas[6] = data.C6;
+    cartas[7] = data.C7;
+    cartas[8] = data.C8;
+    cartas[9] = data.C9;
+    cartas[10] = data.C10;
+    cartas[11] = data.C11;
+    cartas[12] = data.C12;
+  }
 })
 function addMessage(e) {  
   var message = {
@@ -474,7 +481,14 @@ function addWinner(Sala,player){
   return false;
 }
 function Crear(op){
-  if(op==0){
+  bandera=true;
+  for(x=0;x<rooms.length;x++){
+    if(document.getElementById("room").value==rooms[x]){
+      bandera=false;
+    }
+  }
+  if(bandera==true){
+    if(op==0){
     var room = {
       name: document.getElementById("room").value,
       status: 4,
@@ -482,33 +496,37 @@ function Crear(op){
       admin: 1
     }
     MostrarAmigos()
-  }
-  if(op==1){
-    var room = {
-      name: document.getElementById("room").value,
-      status: 0,
-      player: 1,
-      admin: 1
     }
-  }
-  Sala = room.name;
-    idplayer = 1;
-    turno = true;
-    document.getElementById("room").innerHTML = Sala;
-    document.getElementById("jugador").innerHTML = idplayer;
-    document.getElementById("Sala").innerHTML = room.name;
-    
-    socket.emit('new-room', room);
-    var user = {
-      Sala: Sala,
-      player: player,
-      status: 0
+    if(op==1){
+      var room = {
+        name: document.getElementById("room").value,
+        status: 0,
+        player: 1,
+        admin: 1
+      }
     }
+    Sala = room.name;
+      idplayer = 1;
+      turno = true;
+      document.getElementById("name_room").innerHTML = Sala;
+      document.getElementById("jugador").innerHTML = idplayer;
+      document.getElementById("Sala").innerHTML = room.name;
+          
+      socket.emit('new-room', room);
+      var user = {
+        Sala: Sala,
+        player: player,
+        status: 0
+      }
 
-    socket.emit('new-user',user);
-    MostrarUsuarios()
+      socket.emit('new-user',user);
+      MostrarUsuarios()
+  }
+  else{
 
-  
+    alert("ya existe una sala con este nombre");
+
+  }
   return false;
 }
 function iniciar(Sala){
@@ -539,11 +557,30 @@ function unirse(name,IDP){
   return false;
 }
 function reiniciarSala(Sala){
-  var card = {
-    Sala: Sala,
-    contador: restantes
-  }
-  socket.emit('new-reset',card);
+  socket.emit('new-reset',Sala);
+      var room = {
+        name: Sala,
+        status: 6,
+        player: 1,
+        admin: 1
+      }
+    Sala = room.name;
+      idplayer = 1;
+      turno = true;
+      document.getElementById("name_room").innerHTML = Sala;
+      document.getElementById("jugador").innerHTML = idplayer;
+      document.getElementById("Sala").innerHTML = room.name;
+          
+      socket.emit('new-room', room);
+      var user = {
+        Sala: Sala,
+        player: player,
+        status: 0
+      }
+
+      socket.emit('new-user',user);
+      MostrarUsuarios()
+      
   return false;
 }
 function cerrarSala(Sala){
@@ -596,3 +633,4 @@ function solicitud(amigo,clave){
   socket.emit('new-solicitud',card);
   return false;
 }
+

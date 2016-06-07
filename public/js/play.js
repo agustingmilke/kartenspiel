@@ -30,7 +30,11 @@ function CheckCell(x,z){
 				if(x==14)c=0;
 				if(x==13)c=1;
 				M = document.getElementById("P"+c);
-				if(i==0)i=j-1;
+				if(i==0){
+					i=j-1;
+					cartas[i]=cartas[i]++;
+					comodin()
+				}
 				if(j==null){
 					i=12;
 					M.style.visibility="visible";
@@ -42,6 +46,7 @@ function CheckCell(x,z){
 					i=13;
 					board[x]=null;
 					M.innerHTML="";
+					revolver()
 				}
 				if(q==2){
 						q=4;
@@ -55,7 +60,7 @@ function CheckCell(x,z){
 						}
 						if(y==0){
 							for(x=0;x<6;x++){
-							y=Math.round(Math.random()*12);
+							y=robar();
 							SelectCell(x,y);
 							}
 						}
@@ -76,10 +81,10 @@ function CheckCell(x,z){
 				else if(q==1){
 					N = document.getElementById("T");
 					q=4;
-					y=Math.round(Math.random()*12);
+					y=robar();
 					SelectCell(s,y);
 					t++;
-					if(t==6){
+					if(t==2){
 						board[s]=13;
 						i=13;
 						N.innerHTML="";
@@ -93,7 +98,11 @@ function CheckCell(x,z){
 			 if((i==1&&(j==null||j==13))||((i==j+1||i==0)&&i<13)){
 				if(x==11)c=2;
 				if(x==10)c=3;
-				if(i==0)i=j+1;
+				if(i==0){
+					i=j+1;
+					cartas[i]=cartas[i]++;
+					comodin()
+				}
 				M = document.getElementById("P"+c);
 				if(j==null){
 					i=1;
@@ -106,6 +115,7 @@ function CheckCell(x,z){
 					i=13;
 					board[x]=null;
 					M.innerHTML="";
+					revolver()
 				}
 				if(q==2){
 					q=4;
@@ -119,7 +129,7 @@ function CheckCell(x,z){
 						}
 						if(y==0){
 							for(x=0;x<6;x++){
-							y=Math.round(Math.random()*12);
+							y=robar();
 							SelectCell(x,y);
 							}
 						}
@@ -140,10 +150,10 @@ function CheckCell(x,z){
 				else if(q==1){
 					N = document.getElementById("T");
 					q=4;
-					y=Math.round(Math.random()*12);
+					y=robar();
 					SelectCell(s,y);
 					t++;
-					if(t==6){
+					if(t==2){
 						board[s]=13;
 						i=13;
 						N.innerHTML="";
@@ -185,8 +195,8 @@ function CheckCell(x,z){
 		if(z==5&&turno==true){
 			if(w==1){
 				for(x=0;x<6;x++){
-					y=Math.round(Math.random()*12);
 					if(board[x]==13){
+						y=robar();
 						SelectCell(x,y);
 					}	
 				}
@@ -207,7 +217,7 @@ function play(){
 	}
 	t=0;
 	for(x=0;x<7;x++){
-		y=Math.round(Math.random()*12);
+		y=robar();
 		SelectCell(x,y);
 	}
 	addUsername(idplayer,player,Sala)
@@ -248,18 +258,98 @@ function Selection(S){
 			break;	
 	}	
 }
+function comodin(){
+	var card = {
+		C1: cartas[1],
+		C2: cartas[2],
+		C3: cartas[3],
+		C4: cartas[4],
+		C5: cartas[5],
+		C6: cartas[6],
+		C7: cartas[7],
+		C8: cartas[8],
+		C9: cartas[9],
+		C10: cartas[10],
+		C11: cartas[11],
+		C12: cartas[12],
+		Sala: Sala
+	}
+	socket.emit('new-baraja',card);
+	return false;
+}
+function robar(){
+	do{
+		carta=true;
+		y=Math.round(Math.random()*12);
+		for(x=1;x<cartas.length;x++){
+			if(y==x){
+				if(cartas[x]<8){
+					cartas[x]++;
+				}
+				else{
+					carta=false;
+				}
+			}
+		}
+	}while(carta==false);
+
+	var card = {
+		C1: cartas[1],
+		C2: cartas[2],
+		C3: cartas[3],
+		C4: cartas[4],
+		C5: cartas[5],
+		C6: cartas[6],
+		C7: cartas[7],
+		C8: cartas[8],
+		C9: cartas[9],
+		C10: cartas[10],
+		C11: cartas[11],
+		C12: cartas[12],
+		Sala: Sala
+	}
+	socket.emit('new-baraja',card);
+	return y;
+}
+function revolver(){
+	for(x=1;x<cartas.length;x++){
+		cartas[x]=cartas[x]-1;
+	}
+	var card = {
+		C1: cartas[1],
+		C2: cartas[2],
+		C3: cartas[3],
+		C4: cartas[4],
+		C5: cartas[5],
+		C6: cartas[6],
+		C7: cartas[7],
+		C8: cartas[8],
+		C9: cartas[9],
+		C10: cartas[10],
+		C11: cartas[11],
+		C12: cartas[12],
+		Sala: Sala
+	}
+	socket.emit('new-baraja',card);
+	return false;
+}
 function MostrarJuego(){
 	document.getElementById("Seleccion").style.display="none";
 	document.getElementById("modo").style.display="none";
 	document.getElementById("Salas").style.display="none";
 	document.getElementById("crearSalas").style.display="none";
 	document.getElementById("content").style.display="block";
+	document.getElementById("board").style.display="block";
 	document.getElementById("Usuarios").style.display="none";
+	document.getElementById("Amigos").style.display="none";
+	document.getElementById("ganador").style.display="none";
 	document.getElementById("content").style = "background-image: url(images/Fondo_"+SF+".jpg); height: 650px;";
+
 	socket.emit('consultaAmigos',player);
 	play()
 }
 function MostrarCrear(){
+	document.getElementById("Amigos").style.display="none";
 	document.getElementById("modo").style.display="none";
 	document.getElementById("Seleccion").style.display="none";
 	document.getElementById("content").style.display="none";
@@ -278,6 +368,8 @@ function MostrarSalas(){
 }
 function MostrarSeleccion(){
 	socket.emit('new-ganadas',player);
+	for(x=0;x<13;x++)
+  		cartas[x]=0;
 	document.getElementById("P0").innerHTML="";
 	document.getElementById("P1").innerHTML="";
 	document.getElementById("P2").innerHTML="";
@@ -303,14 +395,18 @@ function MostrarSeleccion(){
 	document.getElementById("crearSalas").style.display="none";
 	document.getElementById("content").style.display="none";
 	document.getElementById("Usuarios").style.display="none";
+	document.getElementById("Amigos").style.display="none";
+	document.getElementById("ganador").style.display="none";
 }
 function MostrarModo(){
+	Sala ="";
 	document.getElementById("Seleccion").style.display="none";
 	document.getElementById("modo").style.display="block";
 	document.getElementById("Salas").style.display="none";
 	document.getElementById("crearSalas").style.display="none";
 	document.getElementById("content").style.display="none";
 	document.getElementById("Usuarios").style.display="none";
+	document.getElementById("Amigos").style.display="none";
 }
 function MostrarUsuarios(){
 	document.getElementById("Seleccion").style.display="none";
@@ -318,6 +414,7 @@ function MostrarUsuarios(){
 	document.getElementById("Salas").style.display="none";
 	document.getElementById("crearSalas").style.display="none";
 	document.getElementById("content").style.display="none";
+	document.getElementById("ganador").style.display="none";
 	document.getElementById("Usuarios").style.display="block";
 }
 function MostrarAmigos(){
@@ -331,6 +428,7 @@ document.getElementById("crearSalas").style.display="none";
 document.getElementById("content").style.display="none";
 document.getElementById("Usuarios").style.display="none";
 document.getElementById("Amigos").style.display="none";
+document.getElementById("ganador").style.display="none";
 SC=1;
 SF=1;
 /*play();*/
