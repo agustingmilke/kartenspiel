@@ -22,7 +22,7 @@
       }
         
     }
- window.onload = function() {
+ function click() {
    var myAudio = document.getElementById("myAudio");
    myAudio.volume = .5;
    myAudio.play();
@@ -32,10 +32,11 @@
      
 </head>
 <body align="center" style="background-image: url(images/Fondo_5.jpg)">
-  <audio id="myAudio" autoplay loop>
+  <audio id="myAudio" >
     <source scr="sonidos/musica.mp3" type="audio/mpeg">
     Tu navegador no soporta el elemento de audio
   </audio> 
+  <input value="boton" type="button" onclick="click()" >
   <div id="status"></div>
 
   <div id="modo">
