@@ -15,6 +15,7 @@ var almacen = new Array(3);
 function musica(){
 	var myAudio = document.getElementById("myAudio");
 	myAudio.volume = volumen;
+	myAudio.play();
 	alert(volumen);
 }
 function SelectCell(x, y){
