@@ -31,10 +31,6 @@ img{
 	border:solid;
 }
 
-img.logros{
-	border:none;
-}
-
 section.contacto{
 	background-color: rgba(200, 200, 200, .3);
     margin: auto;
