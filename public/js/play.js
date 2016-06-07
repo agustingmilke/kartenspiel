@@ -86,7 +86,7 @@ function CheckCell(x,z){
 					y=robar();
 					SelectCell(s,y);
 					t++;
-					if(t==2){
+					if(t==11){
 						board[s]=13;
 						i=13;
 						N.innerHTML="";
@@ -155,7 +155,7 @@ function CheckCell(x,z){
 					y=robar();
 					SelectCell(s,y);
 					t++;
-					if(t==2){
+					if(t==11){
 						board[s]=13;
 						i=13;
 						N.innerHTML="";
