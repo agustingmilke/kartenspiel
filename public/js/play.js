@@ -12,9 +12,6 @@ var almacen = new Array(3);
 //z = grupo seleccionado (0: pilas desc, 1: pilas asc, 2: almacen, 3: torre, 4: mano, 5: mazo)
 //q = grupo seleccionado anteriormente (0: almacen, 1: torre, 2: mano, 4: no hay seleccion)
 //t = cartas de la torre que han sido usadas
-function musica(){
-	
-}
 function SelectCell(x, y){
 		if(x<6)M = document.getElementById("M"+x);
 		else if(x==6){

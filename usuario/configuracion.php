@@ -16,7 +16,7 @@ session_start();
         <TITLE>Login</TITLE>
         <link type="image/png" rel="icon" href="img/KartenSpiel_icono.png">
         <link rel="stylesheet" type="text/css" href="css/estilos.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
     </HEAD>
 
 
@@ -39,7 +39,7 @@ session_start();
             </audio>
             <table>
                 <tr>
-                    <form action="metodos.php" method="post" onsubmit="volum()">
+                    <form action="metodos.php" method="post" >
                         
                             <td><center><input type="range" min="0" max="1" value="<?php echo $_SESSION["volumen"]?>" step="0.1" id="volumen" name="volumen"></center></td>
                             <input type="hidden" value="sonido" name="action">
@@ -72,9 +72,7 @@ session_start();
     </BODY>
 
     <script>
-        function volum(){
-            sessionStorage.setItem("volumen", .1);
-        }
+    
         var barra = document.getElementById("volumen");
         var myAudio = document.getElementById("myAudio");
         barra.addEventListener("change",function(ev){
