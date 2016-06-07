@@ -354,8 +354,10 @@ socket.on('Winner',function(data){
 })
 socket.on('reset',function(data){
   if(data.Sala==Sala){
+    alert(data.player);
+    IDP=data.player;
     document.getElementById("ganador").innerHTML += `<img src="images/cerrar_sesion.png" onclick="MostrarModo()" width="90" height="90">
-                                                    <img src ="images/aceptar.png" onclick="unirse(Sala,data.player)" width="90" height="90">`;
+                                                    <img src ="images/aceptar.png" onclick="unirse(Sala,IDP)" width="90" height="90">`;
 
   }
 })
