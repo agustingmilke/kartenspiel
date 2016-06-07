@@ -253,7 +253,12 @@ socket.on('rooms',function(data){
     rooms.splice(0,rooms.length);
   for(x=0;x<data.length;x++){
     rooms[x]=data[x].name;
-    document.getElementById("SalasActivas").innerHTML += `<div>${data[x].name}</div>`;
+    if(data[x].status==2)status_sala='Sala llena';
+    if(data[x].status==4||data[x].status==5) status_sala='Sala de amigos';
+    if(data[x].status==0||data[x].status==1) status_sala='Sala Activa';
+    if(data[x].status==6||data[x].status==7) status_sala='Sala reiniciada';
+    if(data[x].status==3) status_sala='Sala en uso';
+    document.getElementById("SalasActivas").innerHTML += `<div>${data[x].name}+" : " status_sala</div>`;
     if(data[x].status!=2&&data[x].status!=3&&data[x].status!=4&&data[x].status!=5&&data[x].status!=6&&data[x].status!=7){ //sala llena o juego en curso o solo amigos
       document.getElementById('listaSalas').innerHTML +=`<div><strong>${data[x].name},${data[x].player}</strong><img src="images/aceptar.png" onclick="unirse('${data[x].name}',${data[x].player})" width="50" height="50"></div>`;
     }    
