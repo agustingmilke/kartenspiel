@@ -27,10 +27,7 @@
 
 
     <BODY background="img/url.jpg">
-    <audio id="myAudio" autoplay>
-    <source scr="public/sonidos/torre.mp3" type="audio/mpeg">
-    Tu navegador no soporta el elemento de audio
-  </audio>
+    
 
 
         <NAV>
