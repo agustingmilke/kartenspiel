@@ -23,7 +23,7 @@ session_start();
     <BODY background="img/url.jpg">
 
         <HEADER>
-            <a href="menu.php"><img src="img/volver.png" width=40 height=40 style="position:absolute"></a>
+            <a href="menu.php"><img src="img/volver.png" width=40 height=40 style="position:absolute;"></a>
         </HEADER>
 
         <NAV>
@@ -31,7 +31,7 @@ session_start();
 
         <SECTION class="config">
         	<h1 align="center">Configuracion</h1>
-            <hr align="center">
+            <center><img class='logros' src='img/linea.png' width='500px' height='25px'></center>
             <br><br>
             <audio id="myAudio">
                 <source src="sonidos/cambio de turno.mp3" type="audio/mpeg">

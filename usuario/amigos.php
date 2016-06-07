@@ -38,7 +38,7 @@
     <BODY background="img/url.jpg">
 
         <HEADER>
-            <a href="menu.php"><img src="img/volver.png" width=40 height=40 style="position:absolute"></a>
+            <a href="menu.php"><img src="img/volver.png" width=40 height=40 style="position:absolute;"></a>
         </HEADER>
 
         <NAV>
@@ -65,7 +65,7 @@
                                 echo "<input type='hidden' name='action' value='anti-amigo'>";
                                 echo "<input type='hidden' name='amigo' value='".$row["Amigo"]."'>";
                             echo "</form>";
-                            echo "<hr size=1 align='center'><br>";
+                            echo "<center><img class='logros' src='img/linea.png' width='500px' height='25px'></center>";
                         } while ($row = mysqli_fetch_array($consulta, MYSQLI_ASSOC)); 
                     } 
                     else { 
@@ -86,7 +86,7 @@
                                 echo "<input type='hidden' name='id' value='".$row["Id"]."'>";
                                 echo "<input type='hidden' name='action' value='aceptar'>";
                             echo "</form>";
-                            echo "<hr size=1 align='center'><br>"; 
+                            echo "<center><img class='logros' src='img/linea.png' width='500px' height='25px'></center>"; 
                         } while ($row = mysqli_fetch_array($solicitudes, MYSQLI_ASSOC)); 
                     } 
                     else { 
