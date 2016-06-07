@@ -15,11 +15,6 @@ socket.on('inicio',function(data){
 socket.on('volumen',function(data){
   volumen = data;  
   alert(volumen);
-  
-    document.getElementById("Audio").innerHTML= '<audio id="myAudio" autoplay loop>
-                                                  <source src="sonidos/musica.mp3" type="audio/mpeg">
-                                                  Tu navegador no soporta el elemento de audio
-                                                </audio> ';
     var myAudio = document.getElementById("myAudio");
     myAudio.volume = volumen;
     myAudio.play();
