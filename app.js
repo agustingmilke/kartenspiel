@@ -7,7 +7,7 @@ var mysql   = require('mysql');
 var rooms = [];
 var users = [];
 var invitaciones = [];
-var inicio;
+var init;
 var res;
 var p;
 var connection = mysql.createConnection({
@@ -27,8 +27,8 @@ connection.query('SELECT * from usuarios', function(err,rows,fields){
 app.use(express.static(path.join(__dirname, 'public')));
     app.get('/',function(req,res){
       console.log(req.query);
-      var inicio={
-        name: req.query.name
+      var init={
+        name: req.query.name,
         volumen: req.query.volumen
       }
       
@@ -39,7 +39,7 @@ app.get('/hello', function(req, res) {
   res.status(200).send("Hello World!");
 });
 io.on('connection', function(socket) {  
-  socket.emit('inicio',inicio);
+  socket.emit('inicio',init);
     socket.emit('rooms',rooms);
     io.sockets.emit('invitacion',invitaciones);
   //console.log('Alguien se ha conectado con Sockets');
