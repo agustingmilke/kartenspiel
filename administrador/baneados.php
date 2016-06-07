@@ -9,7 +9,7 @@
         echo "no hay";
     }
 
-    $con = mysqli_connect("localhost", "root", "", "kartenspiel");  
+    $con = mysqli_connect("localhost", "root", "kartenspiel", "kartenspiel");  
     $consulta = mysqli_query($con, "select * from usuarios WHERE Status = 'B'");
 
 ?>

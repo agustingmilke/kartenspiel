@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	$con = mysqli_connect("localhost", "root", "", "kartenspiel");  
+	$con = mysqli_connect("localhost", "root", "kartenspiel", "kartenspiel");  
     $consulta = mysqli_query($con, "select * from baneados where Usuario='".  $_SESSION["baneado"]  ."'");
     if($row = mysqli_fetch_array($consulta, MYSQLI_ASSOC)){
     	$mensaje = $row["Mensaje"];

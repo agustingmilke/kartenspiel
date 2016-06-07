@@ -22,6 +22,15 @@
 		<link type="image/png" rel="icon" href="img/KartenSpiel_icono.png">
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script>
+            function ok(){
+                confirmar=confirm("¿Estas seguro de eliminar este comentario?"); 
+                if (confirmar) 
+                    return true;
+                else 
+                    return false; 
+            }
+        </script>
 	</head>
 	<body background="img/url.jpg ">
 		<header>
@@ -67,7 +76,9 @@
 						echo "</table>";
 						echo "<center>";
 						echo "<div class='boton'>";
-							echo "<form action='metodos.php' method='post'>";
+						////////////////////////////////////////////////////////////////////////////////
+							echo "<form action='mensaje.php' method='post' onsubmit='return ok()'>";
+							///////////////////////////////////////////////////////////////////////////
 								echo "<input type='hidden' name='usuario' value='".$row['Usuario']."'>";
 								echo "<input type='hidden' name='action' value='eliminar'>";
 								echo "<input class='bMenu' type='submit' value='Eliminar'><br><br><br>";
