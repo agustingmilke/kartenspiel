@@ -233,6 +233,7 @@ socket.on('sigTurn',function(data){
   if(data.Sala==Sala){
     if(idplayer==data.turn){
       turno=true;
+      alert("Es tu turno");
       document.getElementById('salir').innerHTML = '<img src="images/cerrar_sesion.png" onclick="Abandono()" class="player" width="90" height="80">';
     }
     else{
