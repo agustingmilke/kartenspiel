@@ -13,10 +13,7 @@ var almacen = new Array(3);
 //q = grupo seleccionado anteriormente (0: almacen, 1: torre, 2: mano, 4: no hay seleccion)
 //t = cartas de la torre que han sido usadas
 function musica(){
-	var myAudio = document.getElementById("myAudio");
-	myAudio.volume = volumen;
-	myAudio.play();
-	alert(volumen);
+	
 }
 function SelectCell(x, y){
 		if(x<6)M = document.getElementById("M"+x);
