@@ -11,6 +11,7 @@ for(x=0;x<5;x++)
 socket.on('inicio',function(data){
   player = data.name;  
   volumen = data.volumen;
+  alert ("jiji"+volumen);
 })
 socket.on('ganadas',function(data){
   //alert(data);
