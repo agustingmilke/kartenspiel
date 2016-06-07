@@ -9,7 +9,6 @@
                 $consulta2 = mysqli_query($con, "select * from baneados where Usuario='".  $_POST["usuario"]  ."'");
                 if($row2 = mysqli_fetch_array($consulta2, MYSQLI_ASSOC)){
                     $_SESSION["baneado"]=$_POST["usuario"];
-                    echo "<script>alert('".$row2['Mensaje']."');</script>";
                     echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=mensaje.php'> ";
                 }
             }

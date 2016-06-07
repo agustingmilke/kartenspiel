@@ -1,7 +1,7 @@
 <?php
 
 if (isset($_POST["clave"]) && isset($_POST["usuario"]) && isset($_POST["correo"]) && isset($_POST["edad"]) && isset($_POST["nombre"]) ) {
-		$con = mysqli_connect("localhost", "root", "kartenspiel", "kartenspiel"); 
+		$con = mysqli_connect("localhost", "root", "kartenspiel", "kartenspiel");
 		$sql = "SELECT * FROM usuarios WHERE correo = '".$_POST["correo"]."' OR Usuario = '".$_POST["usuario"]."' ";
         $consulta = mysqli_query($con, $sql);
 

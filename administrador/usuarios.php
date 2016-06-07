@@ -7,7 +7,7 @@
         }
         else
         {
-            echo "no hay";
+            echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=../Login.php'> ";
         }
 
         $con = mysqli_connect("localhost", "root", "kartenspiel", "kartenspiel");  
