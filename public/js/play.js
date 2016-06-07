@@ -3,7 +3,9 @@ var Total_mins;
 var cronometer;
 var board = new Array(14);
 var almacen = new Array(3);
-
+var cartas = [13];
+for(x=0;x<13;x++)
+  cartas[x]=0;
 //w = variable que se utiliza para saber si el jugador ya robo cartas en su turno
 //j = guarda el valor anterior de la pila, para ser comparada despues
 //i = guarda el valor seleccionado de la torre, mano o almacen
@@ -368,8 +370,7 @@ function MostrarSalas(){
 }
 function MostrarSeleccion(){
 	socket.emit('new-ganadas',player);
-	for(x=0;x<13;x++)
-  		cartas[x]=0;
+	
 	document.getElementById("P0").innerHTML="";
 	document.getElementById("P1").innerHTML="";
 	document.getElementById("P2").innerHTML="";
@@ -387,8 +388,14 @@ function MostrarSeleccion(){
 	document.getElementById("torreD").innerHTML="";
 	document.getElementById("jugadorD").innerHTML=" ";
 	document.getElementById("usuarioD").innerHTML=" ";
-		for(x=0;x<15;x++)
-		board[x]=null;
+		for(x=0;x<15;x++){
+			board[x]=null;
+		}
+		
+		for(x=0;x<13;x++){
+			cartas[x]=0;
+		}
+  		
 	document.getElementById("Seleccion").style.display="block";
 	document.getElementById("modo").style.display="none";
 	document.getElementById("Salas").style.display="none";
