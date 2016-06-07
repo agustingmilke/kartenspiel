@@ -27,6 +27,11 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 	</head>
 	<body background="img/url.jpg">
+	
+        <HEADER>
+            <a href="menu.php"><img src="img/volver.png" width=40 height=40 style="position:absolute"></a>
+        </HEADER>
+
 		<center><h1>LOGROS</h1></center><br>
 		<table>
 			<tr >

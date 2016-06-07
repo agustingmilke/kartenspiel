@@ -24,6 +24,10 @@
 
     <BODY background="img/url.jpg">
 
+        <HEADER>
+            <a href="menu.php"><img src="img/volver.png" width=40 height=40 style="position:absolute"></a>
+        </HEADER>
+
         <SECTION class="contacto">
         	<h1><center>Contacto</center></h1>
         	<h3><center>En el siguiente apartado, podras enviar quejas, sugerencias o comentarios a los administradores de la pagina</center></h3>

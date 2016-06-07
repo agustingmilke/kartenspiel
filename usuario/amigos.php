@@ -38,7 +38,7 @@
     <BODY background="img/url.jpg">
 
         <HEADER>
-        <a href="menu.php"><img src="volver.png" width=40 height=40 style="position:absolute"></a>
+            <a href="menu.php"><img src="img/volver.png" width=40 height=40 style="position:absolute"></a>
         </HEADER>
 
         <NAV>
