@@ -19,7 +19,6 @@ if (isset($_POST["clave"]) && isset($_POST["usuario"]) && isset($_POST["correo"]
             else{
                 echo "<script>alert('no se envio el codigo');</script>";
             }
-            echo "".$codigo."";
             $sql2 ="SELECT * FROM codigo WHERE Usuario = '".$_POST["usuario"]."'";
             $consulta2 = mysqli_query($con, $sql2);
             if($row = mysqli_fetch_array($consulta2, MYSQLI_ASSOC)){

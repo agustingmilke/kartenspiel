@@ -9,7 +9,7 @@
     }
     else
     {
-        //echo "no hay";
+        echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=../Login.php'> ";
     }
 
     $con = mysqli_connect("localhost", "root", "kartenspiel", "kartenspiel");
@@ -39,11 +39,20 @@
 
     $cant = count($año);
 
-	$graph = new Graph(900,350);
+	$graph = new Graph(900,350,"auto");
 	$graph->SetScale("textlin");
 
-	$graph->title->Set('Registro de Usuarios en KartenSpiel');
+	$theme_class=new UniversalTheme;
 
+	$graph->SetTheme($theme_class);
+	$graph->title->Set('Registro de Usuarios en KartenSpiel');
+	$graph->SetBox(false);
+
+	$graph->yaxis->HideZeroLabel();
+	$graph->yaxis->HideLine(false);
+	$graph->yaxis->HideTicks(false,false);
+
+	$graph->xgrid->Show();
 	$graph->xgrid->SetLineStyle("solid");
 	$graph->xaxis->SetTickLabels(array('Ene','Feb','Mar','Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Nov', 'Oct', 'Dic'));
 	$graph->xgrid->SetColor('#E3E3E3');
@@ -58,6 +67,8 @@
 		$graph->Add($p1);	
 	}
 
+	$graph->legend->SetFrameWeight(1);
+
 	// Output line
 	//$graph->Stroke();
 	@unlink("registros.png");
@@ -66,6 +77,7 @@
     ?>
 <html>
 	<head>
+		<title>Registros</title>
 		<link rel="stylesheet" type="text/css" href="estilo_administrador.css">
 		<link type="image/png" rel="icon" href="img/KartenSpiel_icono.png">
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>

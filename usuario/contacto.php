@@ -8,7 +8,7 @@
         }
         else
         {
-            echo "no hay";
+            echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=../Login.php'> ";
         }
 
     ?>
@@ -17,10 +17,9 @@
 
 
     <HEAD>
-        <TITLE>Login</TITLE>
+        <TITLE>Contacto</TITLE>
         <link type="image/png" rel="icon" href="img/KartenSpiel_icono.png">
         <link rel="stylesheet" type="text/css" href="css/estilos.css">
-
     </HEAD>
 
     <BODY background="img/url.jpg">

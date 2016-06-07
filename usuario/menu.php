@@ -3,10 +3,15 @@
     
     session_start();
     if(isset($_SESSION["usuario"])){
+        if(isset($_SESSION["volumen"])){
 
+        }
+        else{
+            $_SESSION["volumen"]=.5;
+        }
     }
     else{
-        echo "primero inicia sesion";
+        echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=../Login.php'> ";
     }
     $con = mysqli_connect("localhost", "root", "kartenspiel", "kartenspiel");
 ?>

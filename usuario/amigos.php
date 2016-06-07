@@ -7,7 +7,7 @@
         }
         else
         {
-            echo "no hay";
+            echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=../Login.php'> ";
         }
 
         $con = mysqli_connect("localhost", "root", "kartenspiel", "kartenspiel");  
@@ -38,6 +38,7 @@
     <BODY background="img/url.jpg">
 
         <HEADER>
+        <a href="menu.php"><img src="volver.png" width=40 height=40 style="position:absolute"></a>
         </HEADER>
 
         <NAV>

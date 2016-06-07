@@ -7,7 +7,7 @@
         }
         else
         {
-            echo "no hay";
+            echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=../Login.php'> ";
         }
 
         $con = mysqli_connect("localhost", "root", "kartenspiel", "kartenspiel");  
@@ -17,6 +17,7 @@
 
 <html>
 	<head>
+		<title>Comentarios</title>
 		<link rel="stylesheet" type="text/css" href="estilo_administrador.css">
 		<link type="image/png" rel="icon" href="img/KartenSpiel_icono.png">
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>

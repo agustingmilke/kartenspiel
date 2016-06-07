@@ -18,6 +18,7 @@
 
 <html>
 	<head>
+		<title>Usuarios</title>
 		<link rel="stylesheet" type="text/css" href="estilo_administrador.css">
 		<link type="image/png" rel="icon" href="img/KartenSpiel_icono.png">
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>

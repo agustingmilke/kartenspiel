@@ -20,7 +20,7 @@
                 $row = mysqli_fetch_array($consulta, MYSQLI_ASSOC);
 
                 if($row["Tipo"] == 1){
-                    echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=usuario/menu.html'> ";
+                    echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=usuario/menu.php'> ";
                 }
                 else{
                     echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=administrador/usuarios.php'> ";
@@ -29,7 +29,7 @@
         }
         else
         {
-            echo "no pudo iniciar sesion";
+            echo "  <META HTTP-EQUIV='REFRESH' CONTENT='0;URL=Login.php'> ";
         }
     }
 
