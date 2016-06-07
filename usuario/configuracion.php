@@ -16,7 +16,7 @@ session_start();
         <TITLE>Login</TITLE>
         <link type="image/png" rel="icon" href="img/KartenSpiel_icono.png">
         <link rel="stylesheet" type="text/css" href="css/estilos.css">
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     </HEAD>
 
 
