@@ -5,10 +5,12 @@ var Turnos=[5];
 var invitacion=[];
 var amigos=[];
 var idplayer = 0;
+var volumen = volumen ;
 for(x=0;x<5;x++)
   Turnos[x]=false;
 socket.on('inicio',function(data){
-  player = data;  
+  player = data.name;  
+  volumen = data.volumen;
 })
 socket.on('ganadas',function(data){
   //alert(data);

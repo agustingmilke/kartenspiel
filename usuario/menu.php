@@ -40,6 +40,7 @@
             <center>
             <form action="http://kartenspielweb.info:8080" method="GET">
                 <input name="name" type="hidden" value="<?php echo $_SESSION['usuario'];?>">
+                <input name="volumen" type="hidden" value="<?php echo $_SESSION['volumen']?>">
                 <input class="bMenu" type="submit" value="Jugar" ><br> 
             </form>
                 <input class="bMenu" type="submit" value="Perfil" onclick = "location='perfil.php'"><br>
