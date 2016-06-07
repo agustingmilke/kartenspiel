@@ -5,7 +5,7 @@ var Turnos=[5];
 var invitacion=[];
 var amigos=[];
 var idplayer = 0;
-var volumen = volumen ;
+var volumen = volumen;
 for(x=0;x<5;x++)
   Turnos[x]=false;
 socket.on('inicio',function(data){
