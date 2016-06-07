@@ -1,7 +1,6 @@
 var socket = io.connect('http://kartenspielweb.info:8080', { 'forceNew': true });
 
 var rooms =[];
-var rooms_p =[];
 var Turnos=[5];
 var invitacion=[];
 var amigos=[];
@@ -252,10 +251,8 @@ socket.on('rooms',function(data){
     document.getElementById("empezar").innerHTML = "" ;
     document.getElementById('listaInvitaciones').innerHTML = "";
     rooms.splice(0,rooms.length);
-    rooms_p.splice(0,rooms.length);
   for(x=0;x<data.length;x++){
     rooms[x]=data[x].name;
-    rooms_p[x]=data[x].player;
     if(data[x].status==2)status_sala='Sala llena';
     if(data[x].status==4||data[x].status==5) status_sala='Sala de Amigos';
     if(data[x].status==0||data[x].status==1) status_sala='Sala Activa';
@@ -263,7 +260,7 @@ socket.on('rooms',function(data){
     if(data[x].status==3) status_sala='Sala en Uso';
     document.getElementById("SalasActivas").innerHTML += `<div><strong>${data[x].name} :  ${status_sala}</strong></div>`;
     if(data[x].status!=2&&data[x].status!=3&&data[x].status!=4&&data[x].status!=5&&data[x].status!=6&&data[x].status!=7){ //sala llena o juego en curso o solo amigos
-      document.getElementById('listaSalas').innerHTML +=`<div><strong>${data[x].name}, jugadores : ${data[x].player}</strong><img src="images/aceptar.png" onclick="unirse('${data[x].name}')" width="50" height="50"></div>`;
+      document.getElementById('listaSalas').innerHTML +=`<div><strong>${data[x].name}, jugadores : ${data[x].player}</strong><img src="images/aceptar.png" onclick="unirse('${data[x].name}',${data[x].player})" width="50" height="50"></div>`;
     }    
     if(data[x].admin==idplayer&&(data[x].status==1||data[x].status==5||data[x].status==7)&&data[x].name==Sala){
       document.getElementById("empezar").innerHTML = '<img src="images/aceptar.png" onclick="iniciar(Sala)"width="90" height="90">';
@@ -358,7 +355,7 @@ socket.on('Winner',function(data){
 socket.on('reset',function(data){
   if(data==Sala){
     document.getElementById("ganador").innerHTML += `<img src="images/cerrar_sesion.png" onclick="MostrarModo()" width="90" height="90">
-                                                    <img src ="images/aceptar.png" onclick="unirse(Sala)" width="90" height="90">`;
+                                                    <img src ="images/aceptar.png" onclick="unirse(Sala,1)" width="90" height="90">`;
 
   }
 })
@@ -552,12 +549,7 @@ function iniciar(Sala){
     };
   socket.emit('turn',Turn);
 }
-function unirse(name){
-  for(x=0;x<rooms.length;x++){
-    if(rooms[x].name==name){
-      IDP=rooms_p[x].player;
-    }
-  }
+function unirse(name,IDP){
   document.getElementById("Sala").innerHTML = name;
   socket.emit('new-player',name); //avisa que alguien se ha unido a la sala
 
@@ -603,6 +595,7 @@ function reiniciarSala(Sala){
       
   return false;
 }
+
 function cerrarSala(Sala){
   socket.emit('new-close',Sala);
   return false;
