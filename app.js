@@ -7,7 +7,6 @@ var mysql   = require('mysql');
 var rooms = [];
 var users = [];
 var invitaciones = [];
-var init;
 var res;
 var p;
 var connection = mysql.createConnection({
