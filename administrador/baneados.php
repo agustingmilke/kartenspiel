@@ -15,17 +15,13 @@
 ?>
 <HTML>
 
-    <HEAD>
-        
+    <head>
         <link rel="stylesheet" type="text/css" href="estilo_administrador.css">
         <link type="image/png" rel="icon" href="img/KartenSpiel_icono.png">
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-        
-    </HEAD>
-
+    </head>
 
     <BODY background="img/url.jpg">
-
         <header>
 
             <br>
@@ -41,8 +37,8 @@
                 
             <div id ="menu">
                 <ul>
-                    <li><a href="usuarios.php"> Usuarios</a></li>
-                    <li><a href="comentarios.php"> Comentarios</a></li>
+                    <li><a href="usuarios.php" > Usuarios</a></li>
+                    <li><a href="comentarios.php" > Comentarios</a></li>
                     <li><a href="usuariosRegistrados.php"> Registros</a></li>
                     <li><a href="partidasJugadas.php"> Partidas</a></li>
                     <li><a href="baneados.php"> Baneados</a></li>
@@ -68,9 +64,7 @@
                         echo "</table>";
                         echo "<center>";
                         echo "<div class='boton'>";
-                        ////////////////////////////////////////////////////////////////////////////////
                             echo "<form action='metodos.php' method='post'>";
-                            ///////////////////////////////////////////////////////////////////////////
                                 echo "<input type='hidden' name='usuario' value='".$row['Usuario']."'>";
                                 echo "<input type='hidden' name='action' value='anti-ban'>";
                                 echo "<input class='bMenu' type='submit' value='Recuperar'><br><br><br>";
