@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
       var init={
         name: req.query.name,
         volumen: req.query.volumen
-      }
+      };
       
       res.sendfile(__dirname+'/juego.html') ;  
     });
