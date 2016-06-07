@@ -5,11 +5,18 @@ var Turnos=[5];
 var invitacion=[];
 var amigos=[];
 var idplayer = 0;
+var volumen = volumen;
 for(x=0;x<5;x++)
   Turnos[x]=false;
-
 socket.on('inicio',function(data){
   player = data;  
+
+})
+socket.on('volumen',function(data){
+  volumen = data;  
+    var myAudio = document.getElementById("myAudio");
+    myAudio.volume = volumen;
+    myAudio.play();
 })
 socket.on('ganadas',function(data){
   if(data.player==player){
