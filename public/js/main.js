@@ -262,7 +262,7 @@ socket.on('rooms',function(data){
     if(data[x].status!=2&&data[x].status!=3&&data[x].status!=4&&data[x].status!=5&&data[x].status!=6&&data[x].status!=7){ //sala llena o juego en curso o solo amigos
       document.getElementById('listaSalas').innerHTML +=`<div><strong>${data[x].name}, jugadores : ${data[x].player}</strong><img src="images/aceptar.png" onclick="unirse('${data[x].name}',${data[x].player})" width="50" height="50"></div>`;
     }    
-    if(data[x].admin==idplayer&&(data[x].status==1||data[x].status==5||data[x].status==7)&&data[x].name==Sala){
+    if(data[x].admin==idplayer&&(data[x].status==1||data[x].status==5||data[x].status==7||data[x].status==2)&&data[x].name==Sala){
       document.getElementById("empezar").innerHTML = '<img src="images/aceptar.png" onclick="iniciar(Sala)"width="90" height="90">';
     }
     if(data[x].status==4||data[x].status==5){
