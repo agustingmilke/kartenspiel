@@ -551,7 +551,7 @@ function iniciar(Sala){
 }
 function unirse(name){
   for(x=0;x<rooms.length;x++){
-    if(rooms[x].name=name){
+    if(rooms[x].name==name){
       IDP=rooms[x].player;
     }
   }
