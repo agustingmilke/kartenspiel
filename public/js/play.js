@@ -243,17 +243,17 @@ function Selection(S){
 			break;	
 		case 4:
 			M = document.getElementById("MuestraF");
-			M.style ="background-image: url(images/Fondo_1.jpg); height: 360px; width: 240px;";
+			M.style ="background-image: url(images/Fondo_1.jpg); height: 300px; width: 220px;";
 			SF=1;
 			break;	
 		case 5:
 			M = document.getElementById("MuestraF");
-			M.style ="background-image: url(images/Fondo_2.jpg); height: 360px; width: 240px;";
+			M.style ="background-image: url(images/Fondo_2.jpg); height: 300px; width: 220px;";
 			SF=2;
 			break;	
 		case 6:
 			M = document.getElementById("MuestraF");
-			M.style ="background-image: url(images/Fondo_3.jpg); height: 360px; width: 240px;";
+			M.style ="background-image: url(images/Fondo_3.jpg); height: 300px; width: 220px;";
 			SF=3;
 			break;	
 		default:

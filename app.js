@@ -153,12 +153,12 @@ io.on('connection', function(socket) {
   });
   socket.on('new-reset',function(data){
     for(var x=0;x<rooms.length;x++){
-      if(rooms[x].name==data){
+      if(rooms[x].name==data.Sala){
         rooms.splice(x,1);
       }
     }
     for(var x=0;x<users.length;x++){
-      if(users[x].Sala==data){
+      if(users[x].Sala==data.Sala){
         /*users[x].Sala=null;
         users[x].status=0;*/
         users.splice(x,1);

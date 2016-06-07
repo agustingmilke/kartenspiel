@@ -353,9 +353,9 @@ socket.on('Winner',function(data){
   }
 })
 socket.on('reset',function(data){
-  if(data==Sala){
+  if(data.Sala==Sala){
     document.getElementById("ganador").innerHTML += `<img src="images/cerrar_sesion.png" onclick="MostrarModo()" width="90" height="90">
-                                                    <img src ="images/aceptar.png" onclick="unirse(Sala,1)" width="90" height="90">`;
+                                                    <img src ="images/aceptar.png" onclick="unirse(Sala,data.player)" width="90" height="90">`;
 
   }
 })
@@ -569,13 +569,17 @@ function unirse(name,IDP){
   return false;
 }
 function reiniciarSala(Sala){
-  socket.emit('new-reset',Sala);
+  var card={
+    Sala: Sala,
+    player: 1
+  };
+  socket.emit('new-reset',card);
       var room = {
         name: Sala,
         status: 6,
         player: 1,
         admin: 1
-      }
+      };
     Sala = room.name;
       idplayer = 1;
       turno = true;
@@ -588,7 +592,7 @@ function reiniciarSala(Sala){
         Sala: Sala,
         player: player,
         status: 0
-      }
+      };
 
       socket.emit('new-user',user);
       MostrarUsuarios()
