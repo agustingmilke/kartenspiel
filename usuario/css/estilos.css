@@ -27,10 +27,6 @@ div.agregar{
 	float:none;
 }
 
-img{
-	border:solid;
-}
-
 section.contacto{
 	background-color: rgba(200, 200, 200, .3);
     margin: auto;
