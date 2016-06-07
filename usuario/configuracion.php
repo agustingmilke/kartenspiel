@@ -23,7 +23,7 @@ session_start();
     <BODY background="img/url.jpg">
 
         <HEADER>
-            <a href="menu.php"><img src="img/volver.png" width=40 height=40 style="float:top;"></a>
+            <a href="menu.php"><img src="img/volver.png" width=40 height=40 style="float:top; position:absolute;"></a>
         </HEADER>
 
         <NAV>
