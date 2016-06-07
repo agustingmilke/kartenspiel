@@ -80,9 +80,6 @@
             ?>
         </SECTION>
 
-        <FOOTER>
-        </FOOTER>
-    
     </BODY>
 
 </HTML>
